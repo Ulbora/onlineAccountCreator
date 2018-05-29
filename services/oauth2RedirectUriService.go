@@ -27,9 +27,9 @@ package services
 
 import (
 	"bytes"
-	"encoding/json"
+	//"encoding/json"
 	"fmt"
-	"log"
+	//"log"
 	"net/http"
 )
 
@@ -61,40 +61,42 @@ type RedirectURIResponse struct {
 func (r *RedirectURIService) AddRedirectURI(rd *RedirectURI) *RedirectURIResponse {
 	var rtn = new(RedirectURIResponse)
 	var addURL = r.Host + "/rs/clientRedirectUri/add"
-	aJSON, err := json.Marshal(rd)
+	//aJSON, err := json.Marshal(rd)
+	aJSON := GetJSONEncode(rd)
 
-	if err != nil {
-		fmt.Println(err)
+	// if err != nil {
+	// 	fmt.Println(err)
+	// } else {
+	req, rErr := http.NewRequest("POST", addURL, bytes.NewBuffer(*aJSON))
+	if rErr != nil {
+		fmt.Print("request err in add Red Url: ")
+		fmt.Println(rErr)
 	} else {
-		req, rErr := http.NewRequest("POST", addURL, bytes.NewBuffer(aJSON))
-		if rErr != nil {
-			fmt.Print("request err: ")
-			fmt.Println(rErr)
+		req.Header.Set("Content-Type", "application/json")
+		req.Header.Set("Authorization", "Bearer "+r.Token)
+		req.Header.Set("clientId", r.ClientID)
+		//req.Header.Set("userId", c.UserID)
+		//req.Header.Set("hashed", c.Hashed)
+		req.Header.Set("apiKey", r.APIKey)
+		client := &http.Client{}
+		resp, cErr := client.Do(req)
+		if cErr != nil {
+			fmt.Print("Redirect URI Add err: ")
+			fmt.Println(cErr)
 		} else {
-			req.Header.Set("Content-Type", "application/json")
-			req.Header.Set("Authorization", "Bearer "+r.Token)
-			req.Header.Set("clientId", r.ClientID)
-			//req.Header.Set("userId", c.UserID)
-			//req.Header.Set("hashed", c.Hashed)
-			req.Header.Set("apiKey", r.APIKey)
-			client := &http.Client{}
-			resp, cErr := client.Do(req)
-			if cErr != nil {
-				fmt.Print("Redirect URI Add err: ")
-				fmt.Println(cErr)
-			} else {
-				defer resp.Body.Close()
-				//fmt.Print("resp: ")
-				//fmt.Println(resp)
-				decoder := json.NewDecoder(resp.Body)
-				error := decoder.Decode(&rtn)
-				if error != nil {
-					log.Println(error.Error())
-				}
-				rtn.Code = resp.StatusCode
-			}
+			defer resp.Body.Close()
+			ProcessResponse(resp, rtn)
+			//fmt.Print("resp: ")
+			//fmt.Println(resp)
+			// decoder := json.NewDecoder(resp.Body)
+			// error := decoder.Decode(&rtn)
+			// if error != nil {
+			// 	log.Println(error.Error())
+			// }
+			rtn.Code = resp.StatusCode
 		}
 	}
+	//}
 	return rtn
 }
 
@@ -118,11 +120,12 @@ func (r *RedirectURIService) GetRedirectURIList(clientID string) *[]RedirectURI 
 			fmt.Println(cErr)
 		} else {
 			defer resp.Body.Close()
-			decoder := json.NewDecoder(resp.Body)
-			error := decoder.Decode(&rtn)
-			if error != nil {
-				log.Println(error.Error())
-			}
+			ProcessResponse(resp, &rtn)
+			// decoder := json.NewDecoder(resp.Body)
+			// error := decoder.Decode(&rtn)
+			// if error != nil {
+			// 	log.Println(error.Error())
+			// }
 		}
 	}
 	return &rtn
@@ -133,31 +136,32 @@ func (r *RedirectURIService) GetRedirectURIList(clientID string) *[]RedirectURI 
 // 	var rtn = new(RedirectURIResponse)
 // 	var gURL = r.Host + "/rs/clientRedirectUri/delete/" + id
 // 	//fmt.Println(gURL)
-// 	req, rErr := http.NewRequest("DELETE", gURL, nil)
-// 	if rErr != nil {
-// 		fmt.Print("request err: ")
-// 		fmt.Println(rErr)
+// 	req, _ := http.NewRequest("DELETE", gURL, nil)
+// 	// if rErr != nil {
+// 	// 	fmt.Print("request err: ")
+// 	// 	fmt.Println(rErr)
+// 	// } else {
+// 	req.Header.Set("Content-Type", "application/json")
+// 	req.Header.Set("Authorization", "Bearer "+r.Token)
+// 	req.Header.Set("clientId", r.ClientID)
+// 	//req.Header.Set("userId", r.UserID)
+// 	//req.Header.Set("hashed", r.Hashed)
+// 	req.Header.Set("apiKey", r.APIKey)
+// 	client := &http.Client{}
+// 	resp, cErr := client.Do(req)
+// 	if cErr != nil {
+// 		fmt.Print("redirect uri Service delete err: ")
+// 		fmt.Println(cErr)
 // 	} else {
-// 		req.Header.Set("Content-Type", "application/json")
-// 		req.Header.Set("Authorization", "Bearer "+r.Token)
-// 		req.Header.Set("clientId", r.ClientID)
-// 		//req.Header.Set("userId", r.UserID)
-// 		//req.Header.Set("hashed", r.Hashed)
-// 		req.Header.Set("apiKey", r.APIKey)
-// 		client := &http.Client{}
-// 		resp, cErr := client.Do(req)
-// 		if cErr != nil {
-// 			fmt.Print("redirect uri Service delete err: ")
-// 			fmt.Println(cErr)
-// 		} else {
-// 			defer resp.Body.Close()
-// 			decoder := json.NewDecoder(resp.Body)
-// 			error := decoder.Decode(&rtn)
-// 			if error != nil {
-// 				log.Println(error.Error())
-// 			}
-// 			rtn.Code = resp.StatusCode
-// 		}
+// 		defer resp.Body.Close()
+// 		ProcessResponse(resp, rtn)
+// 		// decoder := json.NewDecoder(resp.Body)
+// 		// error := decoder.Decode(&rtn)
+// 		// if error != nil {
+// 		// 	log.Println(error.Error())
+// 		// }
+// 		rtn.Code = resp.StatusCode
 // 	}
+// 	//}
 // 	return rtn
 // }

@@ -27,9 +27,9 @@ package services
 
 import (
 	"bytes"
-	"encoding/json"
+	//"encoding/json"
 	"fmt"
-	"log"
+	//"log"
 	"net/http"
 )
 
@@ -62,43 +62,44 @@ type ClientResponse struct {
 }
 
 //AddClient add template
-func (c *ClientService) AddClient(client *Client) *ClientResponse {
+func (c *ClientService) AddClient(addClient *Client) *ClientResponse {
 	var rtn = new(ClientResponse)
 	var addURL = c.Host + "/rs/client/add"
-	aJSON, err := json.Marshal(client)
-
-	if err != nil {
-		fmt.Println(err)
+	aJSON := GetJSONEncode(addClient)
+	//aJSON, err := json.Marshal(addClient)
+	// if err != nil {
+	// 	fmt.Println(err)
+	// } else {
+	req, rErr := http.NewRequest("POST", addURL, bytes.NewBuffer(*aJSON))
+	if rErr != nil {
+		fmt.Print("request err: ")
+		fmt.Println(rErr)
 	} else {
-		req, rErr := http.NewRequest("POST", addURL, bytes.NewBuffer(aJSON))
-		if rErr != nil {
-			fmt.Print("request err: ")
-			fmt.Println(rErr)
+		req.Header.Set("Content-Type", "application/json")
+		req.Header.Set("Authorization", "Bearer "+c.Token)
+		req.Header.Set("clientId", c.ClientID)
+		//req.Header.Set("userId", c.UserID)
+		//req.Header.Set("hashed", c.Hashed)
+		req.Header.Set("apiKey", c.APIKey)
+		clientAdd := &http.Client{}
+		resp, cErr := clientAdd.Do(req)
+		if cErr != nil {
+			fmt.Print("Client Add err: ")
+			fmt.Println(cErr)
 		} else {
-			req.Header.Set("Content-Type", "application/json")
-			req.Header.Set("Authorization", "Bearer "+c.Token)
-			req.Header.Set("clientId", c.ClientID)
-			//req.Header.Set("userId", c.UserID)
-			//req.Header.Set("hashed", c.Hashed)
-			req.Header.Set("apiKey", c.APIKey)
-			client := &http.Client{}
-			resp, cErr := client.Do(req)
-			if cErr != nil {
-				fmt.Print("Client Add err: ")
-				fmt.Println(cErr)
-			} else {
-				defer resp.Body.Close()
-				//fmt.Print("resp: ")
-				//fmt.Println(resp)
-				decoder := json.NewDecoder(resp.Body)
-				error := decoder.Decode(&rtn)
-				if error != nil {
-					log.Println(error.Error())
-				}
-				rtn.Code = resp.StatusCode
-			}
+			defer resp.Body.Close()
+			//fmt.Print("resp: ")
+			//fmt.Println(resp)
+			ProcessResponse(resp, rtn)
+			// decoder := json.NewDecoder(resp.Body)
+			// error := decoder.Decode(&rtn)
+			// if error != nil {
+			// 	log.Println(error.Error())
+			// }
+			rtn.Code = resp.StatusCode
 		}
 	}
+	//}
 	return rtn
 }
 
@@ -162,11 +163,12 @@ func (c *ClientService) GetClient(clientID string) *Client {
 			fmt.Println(cErr)
 		} else {
 			defer resp.Body.Close()
-			decoder := json.NewDecoder(resp.Body)
-			error := decoder.Decode(&rtn)
-			if error != nil {
-				log.Println(error.Error())
-			}
+			ProcessResponse(resp, rtn)
+			// decoder := json.NewDecoder(resp.Body)
+			// error := decoder.Decode(&rtn)
+			// if error != nil {
+			// 	log.Println(error.Error())
+			// }
 		}
 	}
 	return rtn
@@ -243,36 +245,37 @@ func (c *ClientService) GetClient(clientID string) *Client {
 // 	return &rtn
 // }
 
-// // DeleteClient delete DeleteClient
-// func (c *ClientService) DeleteClient(id string) *ClientResponse {
-// 	var rtn = new(ClientResponse)
-// 	var gURL = c.Host + "/rs/client/delete/" + id
-// 	//fmt.Println(gURL)
-// 	req, rErr := http.NewRequest("DELETE", gURL, nil)
-// 	if rErr != nil {
-// 		fmt.Print("request err: ")
-// 		fmt.Println(rErr)
-// 	} else {
-// 		req.Header.Set("Content-Type", "application/json")
-// 		req.Header.Set("Authorization", "Bearer "+c.Token)
-// 		req.Header.Set("clientId", c.ClientID)
-// 		//req.Header.Set("userId", r.UserID)
-// 		//req.Header.Set("hashed", r.Hashed)
-// 		req.Header.Set("apiKey", c.APIKey)
-// 		client := &http.Client{}
-// 		resp, cErr := client.Do(req)
-// 		if cErr != nil {
-// 			fmt.Print("redirect uri Service delete err: ")
-// 			fmt.Println(cErr)
-// 		} else {
-// 			defer resp.Body.Close()
-// 			decoder := json.NewDecoder(resp.Body)
-// 			error := decoder.Decode(&rtn)
-// 			if error != nil {
-// 				log.Println(error.Error())
-// 			}
-// 			rtn.Code = resp.StatusCode
-// 		}
-// 	}
-// 	return rtn
-// }
+// DeleteClient delete DeleteClient
+func (c *ClientService) DeleteClient(id string) *ClientResponse {
+	var rtn = new(ClientResponse)
+	var gURL = c.Host + "/rs/client/delete/" + id
+	//fmt.Println(gURL)
+	req, _ := http.NewRequest("DELETE", gURL, nil)
+	// if rErr != nil {
+	// 	fmt.Print("request err: ")
+	// 	fmt.Println(rErr)
+	// } else {
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Authorization", "Bearer "+c.Token)
+	req.Header.Set("clientId", c.ClientID)
+	//req.Header.Set("userId", r.UserID)
+	//req.Header.Set("hashed", r.Hashed)
+	req.Header.Set("apiKey", c.APIKey)
+	client := &http.Client{}
+	resp, cErr := client.Do(req)
+	if cErr != nil {
+		fmt.Print("redirect uri Service delete err: ")
+		fmt.Println(cErr)
+	} else {
+		defer resp.Body.Close()
+		ProcessResponse(resp, rtn)
+		// decoder := json.NewDecoder(resp.Body)
+		// decoder.Decode(&rtn)
+		// // if error != nil {
+		// // 	log.Println(error.Error())
+		// // }
+		rtn.Code = resp.StatusCode
+	}
+	//}
+	return rtn
+}

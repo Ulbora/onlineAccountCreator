@@ -34,12 +34,10 @@ import (
 	"testing"
 )
 
-var CID2rdu int64
-var rdIDrdu int64
+var CID3Gt int64
+var gtID int64
 
-//var tokenrdu string
-
-func TestRedirectURIService_getToken(t *testing.T) {
+func TestGrantTypeService_getToken(t *testing.T) {
 	if testToken == "" {
 		req, _ := http.NewRequest("POST", tokenURL, nil)
 		client := &http.Client{}
@@ -63,7 +61,7 @@ func TestRedirectURIService_getToken(t *testing.T) {
 	}
 }
 
-func TestRedirectURIService_AddClient(t *testing.T) {
+func TestGrantTypeService_AddClient(t *testing.T) {
 	var c ClientService
 	c.ClientID = "403"
 	c.Host = "http://localhost:3000"
@@ -80,130 +78,109 @@ func TestRedirectURIService_AddClient(t *testing.T) {
 	res := c.AddClient(&cc)
 	fmt.Print("add client res: ")
 	fmt.Println(res)
-	CID2rdu = res.ClientID
+	CID3Gt = res.ClientID
 	if res.Success != true {
 		t.Fail()
 	}
 }
 
-func TestRedirectURIService_AddRedirectURI(t *testing.T) {
-	var c RedirectURIService
+func TestGrantTypeService_AddGrantType(t *testing.T) {
+	var c GrantTypeService
 	c.ClientID = "403"
 	c.Host = "http://localhost:3000"
 	c.Token = testToken
-	var uri RedirectURI
-	uri.URI = "http://yahoooo.com"
-	uri.ClientID = CID2rdu
-	res := c.AddRedirectURI(&uri)
-
-	fmt.Print("add uri res: ")
+	var gt GrantType
+	gt.GrantType = "code"
+	gt.ClientID = CID3Gt
+	res := c.AddGrantType(&gt)
+	fmt.Print("add grant type res: ")
 	fmt.Println(res)
-	rdIDrdu = res.ID
+	gtID = res.ID
 	if res.Success != true {
 		t.Fail()
 	}
 }
 
-func TestRedirectURIService_AddRedirectURIBadUrl(t *testing.T) {
-	var c RedirectURIService
+func TestGrantTypeService_AddGrantTypeBadUrl(t *testing.T) {
+	var c GrantTypeService
 	c.ClientID = "403"
 	c.Host = "://localhost:3000"
 	c.Token = testToken
-	var uri RedirectURI
-	uri.URI = "http://yahoooo.com"
-	uri.ClientID = CID2rdu
-	res := c.AddRedirectURI(&uri)
-	fmt.Print("add uri res: ")
+	var gt GrantType
+	gt.GrantType = "code"
+	gt.ClientID = CID3Gt
+	res := c.AddGrantType(&gt)
+	fmt.Print("add grant type res: ")
 	fmt.Println(res)
 	if res.Success == true {
 		t.Fail()
 	}
 }
 
-func TestRedirectURIService_AddRedirectURIReq(t *testing.T) {
-	var c RedirectURIService
+func TestGrantTypeService_AddGrantTypeReq(t *testing.T) {
+	var c GrantTypeService
 	c.ClientID = "403"
 	c.Host = "http://localhost:30001"
 	c.Token = testToken
-	var uri RedirectURI
-	uri.URI = "http://yahoooo.com"
-	uri.ClientID = CID2rdu
-	res := c.AddRedirectURI(&uri)
-	fmt.Print("add uri res: ")
+	var gt GrantType
+	gt.GrantType = "code"
+	gt.ClientID = CID3Gt
+	res := c.AddGrantType(&gt)
+	fmt.Print("add grant type res: ")
 	fmt.Println(res)
 	if res.Success == true {
 		t.Fail()
 	}
 }
 
-func TestRedirectURIService_GetRedirectURIList(t *testing.T) {
-	var c RedirectURIService
-	c.ClientID = "403"
-	c.Host = "http://localhost:3000"
-	c.Token = testToken
-	fmt.Print("get rduls list CID2rdu: ")
-	fmt.Println(CID2rdu)
-	res := c.GetRedirectURIList(strconv.FormatInt(CID2rdu, 10))
-	fmt.Print("uri res list: ")
-	fmt.Println(res)
-	fmt.Print("len: ")
-	fmt.Println(len(*res))
-	if res == nil || len(*res) != 2 {
-		t.Fail()
-	}
-}
-
-func TestRedirectURIService_GetRedirectURIListBadUrl(t *testing.T) {
-	var c RedirectURIService
-	c.ClientID = "403"
-	c.Host = "://localhost:3000"
-	c.Token = testToken
-	res := c.GetRedirectURIList(strconv.FormatInt(CID2rdu, 10))
-	fmt.Print("uri res list: ")
-	fmt.Println(res)
-	fmt.Print("len: ")
-	fmt.Println(len(*res))
-	if res == nil || len(*res) != 0 {
-		t.Fail()
-	}
-}
-
-func TestRedirectURIService_GetRedirectURIListReq(t *testing.T) {
-	var c RedirectURIService
-	c.ClientID = "403"
-	c.Host = "http://localhost:30001"
-	c.Token = testToken
-	fmt.Print("get rduls list CID2rdu: ")
-	fmt.Println(CID2rdu)
-	res := c.GetRedirectURIList(strconv.FormatInt(CID2rdu, 10))
-	fmt.Print("uri res list: ")
-	fmt.Println(res)
-	fmt.Print("len: ")
-	fmt.Println(len(*res))
-	if res == nil || len(*res) != 0 {
-		t.Fail()
-	}
-}
-
-// func TestRedirectURIService_DeleteRedirectURI(t *testing.T) {
-// 	var c RedirectURIService
+// func TestGrantTypeService_GetGrantTypeList(t *testing.T) {
+// 	var c GrantTypeService
 // 	c.ClientID = "403"
 // 	c.Host = "http://localhost:3000"
-// 	c.Token = testToken
-// 	res := c.DeleteRedirectURI(strconv.FormatInt(rdIDrdu, 10))
-// 	fmt.Print("res deleted uri: ")
+// 	c.Token = tempToken
+// 	res := c.GetGrantTypeList(strconv.FormatInt(CID3, 10))
+// 	fmt.Print("grant type res list: ")
 // 	fmt.Println(res)
-// 	if res.Success != true {
+// 	fmt.Print("len: ")
+// 	fmt.Println(len(*res))
+
+// 	if res == nil || len(*res) != 1 || (*res)[0].GrantType != "code" {
 // 		t.Fail()
 // 	}
 // }
 
-func TestRedirectURIService_DeleteClient(t *testing.T) {
+func TestGrantTypeService_DeleteGrantType(t *testing.T) {
+	var c GrantTypeService
+	c.ClientID = "403"
+	c.Host = "http://localhost:3000"
+	c.Token = testToken
+	res := c.DeleteGrantType(strconv.FormatInt(gtID, 10))
+	fmt.Print("res deleted uri: ")
+	fmt.Println(res)
+	if res.Success != true {
+		t.Fail()
+	}
+}
+
+func TestGrantTypeService_DeleteGrantTypeReq(t *testing.T) {
+	var c GrantTypeService
+	c.ClientID = "403"
+	c.Host = "http://localhost:30001"
+	c.Token = testToken
+	res := c.DeleteGrantType(strconv.FormatInt(gtID, 10))
+	fmt.Print("res deleted uri: ")
+	fmt.Println(res)
+	if res.Success == true {
+		t.Fail()
+	}
+}
+
+func TestGrantTypeService_DeleteClient(t *testing.T) {
 	var c ClientService
 	c.ClientID = "403"
 	c.Host = "http://localhost:3000"
 	c.Token = testToken
-	res := c.DeleteClient(strconv.FormatInt(CID2rdu, 10))
+	res := c.DeleteClient(strconv.FormatInt(CID3Gt, 10))
 	fmt.Print("res deleted client: ")
 	fmt.Println(res)
 	if res.Success != true {

@@ -26,23 +26,47 @@
 package services
 
 import (
+	"encoding/json"
 	"fmt"
+	"log"
+	"net/http"
 	"strconv"
 	"testing"
 )
 
 var CIDac int64
-var tokenac string
+
+//var tokenac string
 
 func TestClientService_getToken(t *testing.T) {
-
+	if testToken == "" {
+		req, _ := http.NewRequest("POST", tokenURL, nil)
+		client := &http.Client{}
+		resp, cErr := client.Do(req)
+		if cErr != nil {
+			fmt.Print("Client Add err: ")
+			fmt.Println(cErr)
+		} else {
+			defer resp.Body.Close()
+			var tres TokenResponse
+			decoder := json.NewDecoder(resp.Body)
+			error := decoder.Decode(&tres)
+			if error != nil {
+				log.Println(error.Error())
+			} else {
+				testToken = tres.Token
+				//fmt.Print("token: ")
+				//fmt.Println(testToken)
+			}
+		}
+	}
 }
 
 func TestClientService_AddClient(t *testing.T) {
 	var c ClientService
 	c.ClientID = "403"
 	c.Host = "http://localhost:3000"
-	c.Token = tokenac
+	c.Token = testToken
 	var uri RedirectURI
 	uri.URI = "http://googole.com"
 	var uris []RedirectURI
@@ -57,6 +81,50 @@ func TestClientService_AddClient(t *testing.T) {
 	fmt.Println(res)
 	CIDac = res.ClientID
 	if res.Success != true {
+		t.Fail()
+	}
+}
+
+func TestClientService_AddClientUrl(t *testing.T) {
+	var c ClientService
+	c.ClientID = "403"
+	c.Host = "://localhost:3000"
+	c.Token = testToken
+	var uri RedirectURI
+	uri.URI = "http://googole.com"
+	var uris []RedirectURI
+	uris = append(uris, uri)
+	var cc Client
+	cc.Email = "ken@ken.com"
+	cc.Enabled = true
+	cc.Name = "A Big Company"
+	cc.RedirectURIs = uris
+	res := c.AddClient(&cc)
+	fmt.Print("res: ")
+	fmt.Println(res)
+	if res.Success == true {
+		t.Fail()
+	}
+}
+
+func TestClientService_AddClientReq(t *testing.T) {
+	var c ClientService
+	c.ClientID = "403"
+	c.Host = "http://localhost:30001"
+	c.Token = testToken
+	var uri RedirectURI
+	uri.URI = "http://googole.com"
+	var uris []RedirectURI
+	uris = append(uris, uri)
+	var cc Client
+	cc.Email = "ken@ken.com"
+	cc.Enabled = true
+	cc.Name = "A Big Company"
+	cc.RedirectURIs = uris
+	res := c.AddClient(&cc)
+	fmt.Print("res: ")
+	fmt.Println(res)
+	if res.Success == true {
 		t.Fail()
 	}
 }
@@ -84,13 +152,43 @@ func TestClientService_GetClient(t *testing.T) {
 	var c ClientService
 	c.ClientID = "403"
 	c.Host = "http://localhost:3000"
-	c.Token = tokenac
+	c.Token = testToken
 	fmt.Print("CID: ")
 	fmt.Println(CIDac)
 	res := c.GetClient(strconv.FormatInt(CIDac, 10))
 	fmt.Print("res: ")
 	fmt.Println(res)
 	if res.Enabled != true {
+		t.Fail()
+	}
+}
+
+func TestClientService_GetClientUrl(t *testing.T) {
+	var c ClientService
+	c.ClientID = "403"
+	c.Host = "://localhost:3000"
+	c.Token = testToken
+	fmt.Print("CID: ")
+	fmt.Println(CIDac)
+	res := c.GetClient(strconv.FormatInt(CIDac, 10))
+	fmt.Print("res: ")
+	fmt.Println(res)
+	if res.Enabled == true {
+		t.Fail()
+	}
+}
+
+func TestClientService_GetClientReq(t *testing.T) {
+	var c ClientService
+	c.ClientID = "403"
+	c.Host = "http://localhost:30001"
+	c.Token = testToken
+	fmt.Print("CID: ")
+	fmt.Println(CIDac)
+	res := c.GetClient(strconv.FormatInt(CIDac, 10))
+	fmt.Print("res: ")
+	fmt.Println(res)
+	if res.Enabled == true {
 		t.Fail()
 	}
 }
@@ -125,15 +223,28 @@ func TestClientService_GetClient(t *testing.T) {
 // 	}
 // }
 
-// func TestClientService_DeleteClient(t *testing.T) {
-// 	var c ClientService
-// 	c.ClientID = "403"
-// 	c.Host = "http://localhost:3000"
-// 	c.Token = tempToken
-// 	res := c.DeleteClient(strconv.FormatInt(CID, 10))
-// 	fmt.Print("res deleted: ")
-// 	fmt.Println(res)
-// 	if res.Success != true {
-// 		t.Fail()
-// 	}
-// }
+func TestClientService_DeleteClient(t *testing.T) {
+	var c ClientService
+	c.ClientID = "403"
+	c.Host = "http://localhost:3000"
+	c.Token = testToken
+	res := c.DeleteClient(strconv.FormatInt(CIDac, 10))
+	fmt.Print("res deleted: ")
+	fmt.Println(res)
+	if res.Success != true {
+		t.Fail()
+	}
+}
+
+func TestClientService_DeleteClientReq(t *testing.T) {
+	var c ClientService
+	c.ClientID = "403"
+	c.Host = "http://localhost:30001"
+	c.Token = testToken
+	res := c.DeleteClient(strconv.FormatInt(CIDac, 10))
+	fmt.Print("res deleted: ")
+	fmt.Println(res)
+	if res.Success == true {
+		t.Fail()
+	}
+}
