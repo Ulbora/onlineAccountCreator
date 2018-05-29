@@ -32,7 +32,7 @@ import (
 	"net/http"
 )
 
-//ProcessRespose ProcessRespose
+//ProcessResponse ProcessRespose
 func ProcessResponse(resp *http.Response, obj interface{}) bool {
 	var rtn bool
 	//fmt.Print("resp in processResponse: ")

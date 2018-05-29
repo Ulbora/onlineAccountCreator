@@ -100,7 +100,7 @@ func (g *GrantTypeService) AddGrantType(rd *GrantType) *GrantTypeResponse {
 	return rtn
 }
 
-// // GetGrantTypeList get GetGrantTypeList list
+//GetGrantTypeList GetGrantTypeList
 // func (g *GrantTypeService) GetGrantTypeList(clientID string) *[]GrantType {
 // 	var rtn = make([]GrantType, 0)
 // 	var gURL = g.Host + "/rs/clientGrantType/list/" + clientID
@@ -129,6 +129,7 @@ func (g *GrantTypeService) AddGrantType(rd *GrantType) *GrantTypeResponse {
 // 	}
 // 	return &rtn
 // }
+
 // DeleteGrantType delete DeleteGrantType
 func (g *GrantTypeService) DeleteGrantType(id string) *GrantTypeResponse {
 	var rtn = new(GrantTypeResponse)
