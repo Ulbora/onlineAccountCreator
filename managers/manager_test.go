@@ -10,7 +10,6 @@ import (
 	"testing"
 )
 
-//var clientID string
 var addO2clnt int64
 
 func TestGatewayAccountService_getToken(t *testing.T) {

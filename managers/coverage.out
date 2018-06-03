@@ -10,6 +10,7 @@ onlineAccountCreator/managers/manager.go:84.13,86.2 1 1
 onlineAccountCreator/managers/manager.go:91.36,93.19 2 1
 onlineAccountCreator/managers/manager.go:96.2,96.18 1 1
 onlineAccountCreator/managers/manager.go:93.19,95.3 1 1
+onlineAccountCreator/managers/roleManager.go:40.98,57.2 15 1
 onlineAccountCreator/managers/userManager.go:34.92,41.30 7 1
 onlineAccountCreator/managers/userManager.go:47.2,59.12 13 1
 onlineAccountCreator/managers/userManager.go:41.30,42.24 1 1
