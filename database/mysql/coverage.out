@@ -1,5 +1,0 @@
-mode: set
-onlineAccountCreator/database/mysql/dbauth.go:33.56,36.2 2 1
-onlineAccountCreator/database/mysql/dbauth.go:39.39,43.2 3 1
-onlineAccountCreator/database/mysql/dbgw.go:33.54,36.2 2 1
-onlineAccountCreator/database/mysql/dbgw.go:39.37,43.2 3 1

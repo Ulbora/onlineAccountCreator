@@ -1,10 +1,8 @@
-package mysqldb
-
 /*
- Copyright (C) 2016 Ulbora Labs Inc. (www.ulboralabs.com)
+ Copyright (C) 2017 Ulbora Labs Inc. (www.ulboralabs.com)
  All rights reserved.
 
- Copyright (C) 2016 Ken Williamson
+ Copyright (C) 2017 Ken Williamson
  All rights reserved.
 
  Certain inventions and disclosures in this file may be claimed within
@@ -25,19 +23,38 @@ package mysqldb
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+package managers
+
 import (
-	crud "github.com/Ulbora/go-crud-mysql"
+	services "ApiGatewayAdminPortal/services"
+	"fmt"
 )
 
-//ConnectAuthDb connect to db
-func ConnectAuthDb(host, user, pw, dbName string) bool {
-	res := crud.InitializeMysql(host, user, pw, dbName)
+//AddOauth2User AddOauth2User
+func (g *GatewayAccountService) AddOauth2User(acct *GatewayAccount) *services.UserResponse {
+	var roleID int64
+	var u services.UserService
+	u.ClientID = g.ClientID
+	u.Host = g.UserHost
+	u.Token = g.Token
+	resRoles := u.GetRoleList()
+	for _, r := range *resRoles {
+		if r.Role == "admin" {
+			roleID = r.ID
+			break
+		}
+	}
+	var uu services.User
+	uu.ClientID = acct.ClientID
+	uu.Username = acct.Username
+	uu.RoleID = roleID
+	uu.FirstName = acct.FirstName
+	uu.LastName = acct.LastName
+	uu.EmailAddress = acct.Email
+	uu.Enabled = true
+	uu.Password = generateTempPassword()
+	res := u.AddUser(&uu)
+	fmt.Print("res in add o2 user: ")
+	fmt.Println(res)
 	return res
-}
-
-//ConnectionAuthTest get a row. Passing in tx allows for transactions
-func ConnectionAuthTest() *crud.DbRow {
-	var as []interface{}
-	rowPtr := crud.Get(ConnectionAuthTestQuery, as...)
-	return rowPtr
 }

@@ -1,7 +1,7 @@
 organization=ulboralabs
 projectKey=accountCreator
 serverUrl=https://sonarcloud.io
-serverVersion=7.2.0.12086
+serverVersion=7.2.0.12516
 dashboardUrl=https://sonarcloud.io/dashboard/index/accountCreator
-ceTaskId=AWOpZdMCNPlZRTBE7mYK
-ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWOpZdMCNPlZRTBE7mYK
+ceTaskId=AWPH0bKICPImwYt77Gak
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWPH0bKICPImwYt77Gak

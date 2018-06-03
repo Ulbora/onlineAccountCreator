@@ -1,10 +1,8 @@
-package mysqldb
-
 /*
- Copyright (C) 2016 Ulbora Labs Inc. (www.ulboralabs.com)
+ Copyright (C) 2017 Ulbora Labs Inc. (www.ulboralabs.com)
  All rights reserved.
 
- Copyright (C) 2016 Ken Williamson
+ Copyright (C) 2017 Ken Williamson
  All rights reserved.
 
  Certain inventions and disclosures in this file may be claimed within
@@ -25,7 +23,14 @@ package mysqldb
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-//Database queries
-const (
-	ConnectionAuthTestQuery = "SELECT count(*) from client"
-)
+package managers
+
+var testToken string
+
+var tokenURL = "http://localhost:3000/oauth/token?client_id=403&client_secret=554444vfg55ggfff22454sw2fff2dsfd&grant_type=client_credentials"
+
+type TokenResponse struct {
+	Token     string `json:"access_token"`
+	TokenType string `json:"token_type"`
+	ExpiresIn int    `json:"expires_in"`
+}

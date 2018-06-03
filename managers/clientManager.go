@@ -23,14 +23,37 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package services
+package managers
 
-var testToken string
+import (
+	services "ApiGatewayAdminPortal/services"
+	"fmt"
+)
 
-var tokenURL = "http://localhost:3000/oauth/token?client_id=403&client_secret=554444vfg55ggfff22454sw2fff2dsfd&grant_type=client_credentials"
+//AddOauth2Client AddOauth2Client
+func (g *GatewayAccountService) AddOauth2Client(acct *GatewayAccount) *services.ClientResponse {
+	var c services.ClientService
+	c.Token = g.Token
+	c.Host = g.Host
+	c.ClientID = g.ClientID
+	var cc services.Client
+	cc.Name = acct.Name
+	cc.Email = acct.Email
+	cc.Enabled = true
+	cc.WebSite = acct.WebSite
 
-type TokenResponse struct {
-	Token     string `json:"access_token"`
-	TokenType string `json:"token_type"`
-	ExpiresIn int    `json:"expires_in"`
+	var uris []services.RedirectURI
+	var redirectURLs = []string{prodFreeUserPortalRedirectURL, localUserPortalRedirectURL, localUlboraCmsRedirectURL}
+	for i := range redirectURLs {
+		var uri services.RedirectURI
+		uri.URI = redirectURLs[i]
+		uris = append(uris, uri)
+	}
+	cc.RedirectURIs = uris
+	fmt.Print("cc: ")
+	fmt.Println(cc)
+	res := c.AddClient(&cc)
+	fmt.Print("res in add o2 client: ")
+	fmt.Println(res)
+	return res
 }
