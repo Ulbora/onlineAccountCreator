@@ -2,6 +2,7 @@ mode: set
 onlineAccountCreator/managers/clientManager.go:34.96,47.30 12 1
 onlineAccountCreator/managers/clientManager.go:52.2,58.12 7 1
 onlineAccountCreator/managers/clientManager.go:47.30,51.3 3 1
+onlineAccountCreator/managers/grantTypeManager.go:41.102,64.2 15 1
 onlineAccountCreator/managers/manager.go:61.98,69.17 8 1
 onlineAccountCreator/managers/manager.go:76.2,76.13 1 1
 onlineAccountCreator/managers/manager.go:69.17,75.3 5 1
