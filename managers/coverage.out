@@ -1,4 +1,18 @@
 mode: set
+onlineAccountCreator/managers/allowerUriManager.go:43.130,56.26 10 1
+onlineAccountCreator/managers/allowerUriManager.go:59.2,67.30 8 1
+onlineAccountCreator/managers/allowerUriManager.go:70.2,72.25 3 1
+onlineAccountCreator/managers/allowerUriManager.go:108.2,109.13 2 1
+onlineAccountCreator/managers/allowerUriManager.go:112.2,115.13 3 1
+onlineAccountCreator/managers/allowerUriManager.go:56.26,58.3 1 1
+onlineAccountCreator/managers/allowerUriManager.go:67.30,69.3 1 1
+onlineAccountCreator/managers/allowerUriManager.go:72.25,76.37 2 1
+onlineAccountCreator/managers/allowerUriManager.go:76.37,81.27 3 1
+onlineAccountCreator/managers/allowerUriManager.go:81.27,86.30 5 1
+onlineAccountCreator/managers/allowerUriManager.go:86.30,91.6 4 0
+onlineAccountCreator/managers/allowerUriManager.go:91.6,101.31 9 1
+onlineAccountCreator/managers/allowerUriManager.go:101.31,103.7 1 0
+onlineAccountCreator/managers/allowerUriManager.go:109.13,111.3 1 1
 onlineAccountCreator/managers/clientManager.go:34.96,47.30 12 1
 onlineAccountCreator/managers/clientManager.go:52.2,58.12 7 1
 onlineAccountCreator/managers/clientManager.go:47.30,51.3 3 1

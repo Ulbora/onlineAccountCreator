@@ -44,7 +44,7 @@ func (g *GatewayAccountService) AddClientRole(acct *GatewayAccount) *services.Cl
 	rs.ClientID = g.ClientID
 
 	var rr services.ClientRole
-	rr.ClientID, _ = strconv.ParseInt(acct.ClientID, 10, 0)
+	rr.ClientID, _ = strconv.ParseInt(acct.ClientID, 10, 64)
 	rr.Role = adminRole
 	res := rs.AddClientRole(&rr)
 	fmt.Print("res in add client admin role: ")

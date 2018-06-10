@@ -45,7 +45,7 @@ func (g *GatewayAccountService) AddClientGrantType(acct *GatewayAccount) *servic
 	gt.ClientID = g.ClientID
 
 	var gg services.GrantType
-	gg.ClientID, _ = strconv.ParseInt(acct.ClientID, 10, 0)
+	gg.ClientID, _ = strconv.ParseInt(acct.ClientID, 10, 64)
 	gg.GrantType = codeGrant
 	gt.AddGrantType(&gg)
 
