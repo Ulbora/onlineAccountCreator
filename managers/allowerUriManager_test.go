@@ -103,6 +103,41 @@ func TestGatewayClientUrlService_AddClientRoles(t *testing.T) {
 	}
 }
 
+func TestGatewayClientUrlService_insertAllowedURI(t *testing.T) {
+	var au services.AllowedURIService
+	au.ClientID = "403"
+	au.Host = "http://localhost:3000"
+	au.Token = testToken
+
+	suc, _ := insertAllowedURI("0", "ggg", au)
+	fmt.Println(suc)
+	if !suc {
+		t.Fail()
+	}
+}
+
+func TestGatewayClientUrlService_insertRoleURI(t *testing.T) {
+	var g GatewayAccountService
+	g.Token = testToken
+	g.Host = "http://localhost:3000"
+	g.ClientID = "403"
+	suc := g.insertRoleURI(false, 0, 0)
+	if suc {
+		t.Fail()
+	}
+}
+
+func TestGatewayClientUrlService_insertRoleURI2(t *testing.T) {
+	var g GatewayAccountService
+	g.Token = testToken
+	g.Host = "http://localhost:3000"
+	g.ClientID = "403"
+	suc := g.insertRoleURI(true, 0, 0)
+	if suc {
+		t.Fail()
+	}
+}
+
 func TestGatewayClientUrlService_AddAllowedUris(t *testing.T) {
 	var g GatewayAccountService
 	g.Token = testToken
@@ -143,6 +178,7 @@ func TestGatewayClientUrlService_DeleteRoleUrl(t *testing.T) {
 		rurls := cr.GetRoleURIList(strconv.FormatInt(r.ID, 10))
 		fmt.Print("role uris found for id: ")
 		fmt.Println(rurls)
+		fmt.Println(r)
 		for _, ruri := range *rurls {
 			res := cr.DeleteRoleURI(&ruri)
 			if !res.Success {

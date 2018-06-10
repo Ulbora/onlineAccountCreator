@@ -79,29 +79,8 @@ func (g *GatewayAccountService) AddAllowedUris(acct *GatewayAccount, usel *ulbor
 			//fmt.Println(val.URI)
 			insCnt++
 			if rMap[val.Role] != 0 {
-				var auu services.AllowedURI
-				auu.ClientID, _ = strconv.ParseInt(acct.ClientID, 10, 64)
-				auu.URI = val.URI
-				aures := au.AddAllowedURI(&auu)
-				if aures.Success != true {
-					fmt.Print("error inserting record:")
-					fmt.Println(val.URI)
-					fmt.Println(aures)
-					failed = true
-				} else {
-					var crr services.RoleURI
-					crr.ClientRoleID = rMap[val.Role]
-					crr.ClientAllowedURIID = aures.ID
-					var cr services.RoleURIService
-					cr.ClientID = g.ClientID
-					cr.Host = g.Host
-					cr.Token = g.Token
-
-					crres := cr.AddRoleURI(&crr)
-					if crres.Success != true {
-						fmt.Println(crres)
-					}
-				}
+				failed, aures := insertAllowedURI(acct.ClientID, val.URI, au)
+				g.insertRoleURI(failed, rMap[val.Role], aures.ID)
 			}
 		}(tmpUris[i])
 	}
@@ -113,4 +92,47 @@ func (g *GatewayAccountService) AddAllowedUris(acct *GatewayAccount, usel *ulbor
 	fmt.Println(insCnt)
 
 	return &rtn
+}
+
+func insertAllowedURI(cid string, uri string, au services.AllowedURIService) (bool, *services.AllowedURIResponse) {
+	var failed = false
+	var auu services.AllowedURI
+	auu.ClientID, _ = strconv.ParseInt(cid, 10, 64)
+	auu.URI = uri
+	aures := au.AddAllowedURI(&auu)
+	if !aures.Success {
+		fmt.Print("error inserting record:")
+		fmt.Println(uri)
+		fmt.Println(aures)
+		failed = true
+	}
+	return failed, aures
+}
+
+func (g *GatewayAccountService) insertRoleURI(failed bool, roleID int64, auID int64) bool {
+	//fmt.Print("failed in insert role uri:")
+	//fmt.Println(failed)
+	var rtn = false
+	if !failed {
+		var crr services.RoleURI
+		crr.ClientRoleID = roleID
+		crr.ClientAllowedURIID = auID
+		var cr services.RoleURIService
+		cr.ClientID = g.ClientID
+		cr.Host = g.Host
+		cr.Token = g.Token
+
+		crres := cr.AddRoleURI(&crr)
+		//fmt.Print("inserting url:")
+		//fmt.Println(crres)
+		if !crres.Success {
+			fmt.Print("inserting url error:")
+			fmt.Println(crres)
+		} else {
+			//fmt.Print("inserting url record:")
+			//fmt.Println(crres)
+			rtn = true
+		}
+	}
+	return rtn
 }
