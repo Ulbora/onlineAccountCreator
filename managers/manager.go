@@ -29,6 +29,7 @@ import (
 	services "ApiGatewayAdminPortal/services"
 	"fmt"
 	"math/rand"
+	"strconv"
 	"time"
 )
 
@@ -71,7 +72,14 @@ func (g *GatewayAccountService) AddGatewayAccount(acct *GatewayAccount) *service
 		rtn.ClientID = cid
 		fmt.Print("cid: ")
 		fmt.Println(cid)
-		rtn.Success = true
+		acct.ClientID = strconv.FormatInt(res.ClientID, 10)
+		//rtn.Success = true
+		resu := g.AddOauth2User(acct)
+		fmt.Print("add user in add account: ")
+		fmt.Println(resu)
+		if resu.Success {
+			rtn.Success = true
+		}
 	}
 	return &rtn
 	//fmt.Println(c)

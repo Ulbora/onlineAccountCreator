@@ -40,6 +40,7 @@ func TestGatewayAccountService_AddGatewayAccount(t *testing.T) {
 	var g GatewayAccountService
 	g.Token = testToken
 	g.Host = "http://localhost:3000"
+	g.UserHost = "http://localhost:3001"
 	g.ClientID = "403"
 	var cc GatewayAccount
 	cc.Email = "testEmail"
@@ -47,11 +48,23 @@ func TestGatewayAccountService_AddGatewayAccount(t *testing.T) {
 	cc.LastName = "bob1"
 	cc.Name = "bob1 bob1"
 	cc.WebSite = "www.test1.com"
+	cc.Username = "bobbbbb1"
 	res := g.AddGatewayAccount(&cc)
 	if !res.Success || res.ClientID == 0 {
 		t.Fail()
 	} else {
 		addO2clnt = res.ClientID
+	}
+}
+
+func TestGatewayAccountService_DeleteOauth2User(t *testing.T) {
+	var u services.UserService
+	u.Token = testToken
+	u.Host = "http://localhost:3001"
+	u.ClientID = "403"
+	res := u.DeleteUser("bobbbbb1", strconv.FormatInt(addO2clnt, 10))
+	if !res.Success {
+		t.Fail()
 	}
 }
 
