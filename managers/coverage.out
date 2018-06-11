@@ -1,14 +1,4 @@
 mode: set
-onlineAccountCreator/managers/grantTypeManager.go:41.102,64.2 15 1
-onlineAccountCreator/managers/manager.go:62.98,70.17 8 1
-onlineAccountCreator/managers/manager.go:84.2,84.13 1 1
-onlineAccountCreator/managers/manager.go:70.17,80.19 9 1
-onlineAccountCreator/managers/manager.go:80.19,82.4 1 1
-onlineAccountCreator/managers/manager.go:88.36,90.2 1 1
-onlineAccountCreator/managers/manager.go:92.13,94.2 1 1
-onlineAccountCreator/managers/manager.go:99.36,101.19 2 1
-onlineAccountCreator/managers/manager.go:104.2,104.18 1 1
-onlineAccountCreator/managers/manager.go:101.19,103.3 1 1
 onlineAccountCreator/managers/roleManager.go:40.98,57.2 15 1
 onlineAccountCreator/managers/userManager.go:34.92,41.30 7 1
 onlineAccountCreator/managers/userManager.go:47.2,59.12 13 1
@@ -36,3 +26,15 @@ onlineAccountCreator/managers/allowerUriManager.go:131.4,135.4 1 1
 onlineAccountCreator/managers/clientManager.go:34.96,47.30 12 1
 onlineAccountCreator/managers/clientManager.go:52.2,58.12 7 1
 onlineAccountCreator/managers/clientManager.go:47.30,51.3 3 1
+onlineAccountCreator/managers/grantTypeManager.go:41.102,64.2 15 1
+onlineAccountCreator/managers/manager.go:62.98,70.17 8 1
+onlineAccountCreator/managers/manager.go:90.2,90.13 1 1
+onlineAccountCreator/managers/manager.go:70.17,80.19 9 1
+onlineAccountCreator/managers/manager.go:80.19,82.20 2 1
+onlineAccountCreator/managers/manager.go:82.20,84.22 2 1
+onlineAccountCreator/managers/manager.go:84.22,86.6 1 1
+onlineAccountCreator/managers/manager.go:94.36,96.2 1 1
+onlineAccountCreator/managers/manager.go:98.13,100.2 1 1
+onlineAccountCreator/managers/manager.go:105.36,107.19 2 1
+onlineAccountCreator/managers/manager.go:110.2,110.18 1 1
+onlineAccountCreator/managers/manager.go:107.19,109.3 1 1

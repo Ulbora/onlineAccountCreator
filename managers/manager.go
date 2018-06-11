@@ -78,7 +78,13 @@ func (g *GatewayAccountService) AddGatewayAccount(acct *GatewayAccount) *service
 		fmt.Print("add user in add account: ")
 		fmt.Println(resu)
 		if resu.Success {
-			rtn.Success = true
+			resr := g.AddClientRole(acct)
+			if resr.Success {
+				resgt := g.AddClientGrantType(acct)
+				if resgt.Success {
+					rtn.Success = true
+				}
+			}
 		}
 	}
 	return &rtn

@@ -68,6 +68,46 @@ func TestGatewayAccountService_DeleteOauth2User(t *testing.T) {
 	}
 }
 
+func TestGatewayAccountService_DeleteClientRoles(t *testing.T) {
+	var rs services.ClientRoleService
+	rs.Token = testToken
+	rs.Host = "http://localhost:3000"
+	rs.ClientID = "403"
+	roles := rs.GetClientRoleList(strconv.FormatInt(addO2clnt, 10))
+	fmt.Print("roles: ")
+	fmt.Println(roles)
+	var failed bool
+	for _, r := range *roles {
+		res := rs.DeleteClientRole(strconv.FormatInt(r.ID, 10))
+		if !res.Success {
+			failed = true
+		}
+	}
+	if failed {
+		t.Fail()
+	}
+}
+
+func TestGatewayAccountService_DeleteClientGrantTypes(t *testing.T) {
+	var gt services.GrantTypeService
+	gt.Token = testToken
+	gt.Host = "http://localhost:3000"
+	gt.ClientID = "403"
+	gtypes := gt.GetGrantTypeList(strconv.FormatInt(addO2clnt, 10))
+	fmt.Print("gtypes: ")
+	fmt.Println(gtypes)
+	var failed bool
+	for _, r := range *gtypes {
+		res := gt.DeleteGrantType(strconv.FormatInt(r.ID, 10))
+		if !res.Success {
+			failed = true
+		}
+	}
+	if failed {
+		t.Fail()
+	}
+}
+
 func TestGatewayAccountService_DeleteOauthClient(t *testing.T) {
 	var c services.ClientService
 	c.Token = testToken
