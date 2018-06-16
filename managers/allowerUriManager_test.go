@@ -154,7 +154,10 @@ func TestGatewayClientUrlService_AddAllowedUris(t *testing.T) {
 	var sel ulboraUris.UlboraSelection
 	sel.Oauth2 = true
 	sel.APIGateway = true
-	res := g.AddAllowedUris(&cc, &sel)
+	cc.UlboraSelected = &sel
+	//---------------modify GatewayAccount to include UlboraSelection attr--------------------------------------
+
+	res := g.AddAllowedUris(&cc)
 	fmt.Print("role uri res: ")
 	fmt.Println(res)
 	if !res.Success {

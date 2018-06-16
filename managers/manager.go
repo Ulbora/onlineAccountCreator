@@ -27,6 +27,7 @@ package managers
 
 import (
 	services "ApiGatewayAdminPortal/services"
+	ulboraUris "ApiGatewayAdminPortal/ulborauris"
 	"fmt"
 	"math/rand"
 	"strconv"
@@ -49,13 +50,14 @@ type GatewayAccountService struct {
 
 //GatewayAccount GatewayAccount
 type GatewayAccount struct {
-	Name      string
-	Username  string
-	FirstName string
-	LastName  string
-	WebSite   string
-	Email     string
-	ClientID  string
+	Name           string
+	Username       string
+	FirstName      string
+	LastName       string
+	WebSite        string
+	Email          string
+	ClientID       string
+	UlboraSelected *ulboraUris.UlboraSelection
 }
 
 //AddGatewayAccount AddGatewayAccount
@@ -79,9 +81,16 @@ func (g *GatewayAccountService) AddGatewayAccount(acct *GatewayAccount) *service
 		fmt.Println(resu)
 		if resu.Success {
 			resr := g.AddClientRole(acct)
+			fmt.Print("add roles in add account: ")
+			fmt.Println(resr)
 			if resr.Success {
 				resgt := g.AddClientGrantType(acct)
+				fmt.Print("add grant type in add account: ")
+				fmt.Println(resgt)
 				if resgt.Success {
+					resUris := g.AddAllowedUris(acct)
+					fmt.Print("add uris in add account: ")
+					fmt.Println(resUris)
 					rtn.Success = true
 				}
 			}

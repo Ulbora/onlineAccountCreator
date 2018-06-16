@@ -40,9 +40,9 @@ import (
 // )
 
 //AddAllowedUris AddAllowedUris
-func (g *GatewayAccountService) AddAllowedUris(acct *GatewayAccount, usel *ulboraUris.UlboraSelection) *services.RoleURIResponse {
+func (g *GatewayAccountService) AddAllowedUris(acct *GatewayAccount) *services.RoleURIResponse {
 	var rtn services.RoleURIResponse
-	uuris := ulboraUris.GetUlboraURIs(usel)
+	uuris := ulboraUris.GetUlboraURIs(acct.UlboraSelected)
 	fmt.Println(uuris)
 
 	var rs services.ClientRoleService
