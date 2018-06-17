@@ -46,6 +46,7 @@ type GatewayAccountService struct {
 	Host     string
 	UserHost string
 	ClientID string
+	APIKey   string
 }
 
 //GatewayAccount GatewayAccount
@@ -102,6 +103,10 @@ func (g *GatewayAccountService) AddGatewayAccount(acct *GatewayAccount) *service
 
 func generateTempPassword() string {
 	return randStringRunes(20)
+}
+
+func generateAPIKey() string {
+	return randStringRunes(35)
 }
 
 func init() {
