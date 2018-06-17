@@ -42,6 +42,7 @@ func TestGatewayAccountService_AddGatewayAccount(t *testing.T) {
 	g.Token = testToken
 	g.Host = "http://localhost:3000"
 	g.UserHost = "http://localhost:3001"
+	g.GwHost = "http://localhost:3011"
 	g.ClientID = "403"
 	var cc GatewayAccount
 	cc.Email = "testEmail"
@@ -185,6 +186,20 @@ func TestGatewayAccountService_generateTempPassword(t *testing.T) {
 	fmt.Print("password: ")
 	fmt.Println(pw)
 	if len(pw) != 20 {
+		t.Fail()
+	}
+}
+
+func TestGatewayAccountService_DeleteGwClient(t *testing.T) {
+	var c services.GatewayClientService
+	c.ClientID = "403"
+	c.Host = "http://localhost:3011"
+	c.Token = testToken
+
+	res := c.DeleteClient(strconv.FormatInt(addO2clnt, 10))
+	fmt.Print("res: ")
+	fmt.Println(res)
+	if res.Success != true {
 		t.Fail()
 	}
 }

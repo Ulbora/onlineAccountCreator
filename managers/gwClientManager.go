@@ -38,7 +38,7 @@ func (g *GatewayAccountService) AddGwClient(acct *GatewayAccount) *services.Gate
 
 	var c services.GatewayClientService
 	c.ClientID = g.ClientID
-	c.Host = g.Host
+	c.Host = g.GwHost
 	c.Token = g.Token
 	c.APIKey = g.APIKey
 	var cc services.GatewayClient

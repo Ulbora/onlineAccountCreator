@@ -45,6 +45,7 @@ type GatewayAccountService struct {
 	Token    string
 	Host     string
 	UserHost string
+	GwHost   string
 	ClientID string
 	APIKey   string
 }
@@ -65,10 +66,10 @@ type GatewayAccount struct {
 func (g *GatewayAccountService) AddGatewayAccount(acct *GatewayAccount) *services.ClientResponse {
 	var rtn services.ClientResponse
 	var cid int64
-	var c services.ClientService
-	c.Token = g.Token
-	c.Host = g.Host
-	c.ClientID = g.ClientID
+	// var c services.ClientService
+	// c.Token = g.Token
+	// c.Host = g.Host
+	// c.ClientID = g.ClientID
 	res := g.AddOauth2Client(acct)
 	if res.Success {
 		cid = res.ClientID
@@ -92,7 +93,15 @@ func (g *GatewayAccountService) AddGatewayAccount(acct *GatewayAccount) *service
 					resUris := g.AddAllowedUris(acct)
 					fmt.Print("add uris in add account: ")
 					fmt.Println(resUris)
-					rtn.Success = true
+					if resUris.Success {
+						resgw := g.AddGwClient(acct)
+						fmt.Print("add gw client account: ")
+						fmt.Println(resgw)
+						if resgw.Success {
+							rtn.Success = true
+						}
+					}
+
 				}
 			}
 		}

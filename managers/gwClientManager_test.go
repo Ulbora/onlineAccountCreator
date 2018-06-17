@@ -65,7 +65,7 @@ func TestGwAccountService_getToken(t *testing.T) {
 func TestGwAccountService_AddGwClient(t *testing.T) {
 	var g GatewayAccountService
 	g.Token = testToken
-	g.Host = "http://localhost:3011"
+	g.GwHost = "http://localhost:3011"
 	g.ClientID = "403"
 	g.APIKey = "403"
 
