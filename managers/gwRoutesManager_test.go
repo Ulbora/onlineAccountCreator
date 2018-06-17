@@ -26,15 +26,11 @@
 package managers
 
 import (
-	services "ApiGatewayAdminPortal/services"
-	//ulboraUris "ApiGatewayAdminPortal/ulborauris"
-	//"fmt"
-	//"strconv"
+	//services "ApiGatewayAdminPortal/services"
+
+	"testing"
 )
 
-//AddGwRoutes AddGwRoutes
-func (g *GatewayAccountService) AddGwRoutes(acct *GatewayAccount) *services.GatewayResponse {
-	var rtn services.GatewayResponse
+func TestGatewayAccountService_AddGwRoutes(t *testing.T) {
 
-	return &rtn
 }
