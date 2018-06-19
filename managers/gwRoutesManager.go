@@ -27,14 +27,46 @@ package managers
 
 import (
 	services "ApiGatewayAdminPortal/services"
-	//ulboraUris "ApiGatewayAdminPortal/ulborauris"
 	//"fmt"
-	//"strconv"
+	urts "onlineAccountCreator/routes"
+	"strconv"
 )
 
 //AddGwRoutes AddGwRoutes
 func (g *GatewayAccountService) AddGwRoutes(acct *GatewayAccount) *services.GatewayResponse {
 	var rtn services.GatewayResponse
+	rts := urts.GetActiveRoutes(acct.ActiveRoutes)
+	//fmt.Print("rts in routes: ")
+	//fmt.Println(rts)
 
+	var r services.GatewayRouteService
+	r.ClientID = g.ClientID
+	r.Host = g.GwHost
+	r.Token = g.Token
+
+	var ru services.GatewayRouteURLService
+	ru.ClientID = g.ClientID
+	ru.Host = g.GwHost
+	ru.Token = g.Token
+
+	for _, rt := range *rts.RestRoutes {
+		var rr services.GatewayRoute
+		rr.ClientID, _ = strconv.ParseInt(acct.ClientID, 10, 64)
+		rr.Route = rt.Route
+		res := r.AddRoute(&rr)
+		rtn.Success = res.Success
+		//fmt.Print("res in route loop: ")
+		//fmt.Println(res)
+		for _, rtu := range *rt.RoutesURLs {
+			var rru services.GatewayRouteURL
+			rru.ClientID, _ = strconv.ParseInt(acct.ClientID, 10, 64)
+			rru.RouteID = res.ID
+			rru.Name = rtu.Name
+			rru.URL = rtu.URL
+			ru.AddRouteURL(&rru)
+			//fmt.Print("resu in url loop: ")
+			//fmt.Println(resu)
+		}
+	}
 	return &rtn
 }

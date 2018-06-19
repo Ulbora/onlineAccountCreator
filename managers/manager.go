@@ -30,6 +30,7 @@ import (
 	ulboraUris "ApiGatewayAdminPortal/ulborauris"
 	"fmt"
 	"math/rand"
+	urts "onlineAccountCreator/routes"
 	"strconv"
 	"time"
 )
@@ -60,6 +61,7 @@ type GatewayAccount struct {
 	Email          string
 	ClientID       string
 	UlboraSelected *ulboraUris.UlboraSelection
+	ActiveRoutes   *urts.ActiveRoutes
 }
 
 //AddGatewayAccount AddGatewayAccount
