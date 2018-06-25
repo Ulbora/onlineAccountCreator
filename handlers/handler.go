@@ -39,7 +39,7 @@ type Handler struct {
 
 //GetOauth2Host GetOauth2Host
 func (h *Handler) GetOauth2Host() string {
-	var rtn = ""
+	var rtn string
 	if os.Getenv("OAUTH2_HOST") != "" {
 		rtn = os.Getenv("OAUTH2_HOST")
 	} else {
