@@ -1,6 +1,4 @@
 mode: set
-onlineAccountCreator/managers/grantTypeManager.go:41.102,64.2 15 1
-onlineAccountCreator/managers/gwClientManager.go:36.93,59.2 16 1
 onlineAccountCreator/managers/gwRoutesManager.go:36.93,52.37 11 1
 onlineAccountCreator/managers/gwRoutesManager.go:71.2,71.13 1 1
 onlineAccountCreator/managers/gwRoutesManager.go:52.37,60.38 6 1
@@ -46,3 +44,5 @@ onlineAccountCreator/managers/allowerUriManager.go:131.4,135.4 1 1
 onlineAccountCreator/managers/clientManager.go:34.96,47.30 12 1
 onlineAccountCreator/managers/clientManager.go:52.2,58.12 7 1
 onlineAccountCreator/managers/clientManager.go:47.30,51.3 3 1
+onlineAccountCreator/managers/grantTypeManager.go:41.102,64.2 15 1
+onlineAccountCreator/managers/gwClientManager.go:36.93,59.2 16 1

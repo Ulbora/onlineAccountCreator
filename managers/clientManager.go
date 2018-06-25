@@ -1,8 +1,8 @@
 /*
- Copyright (C) 2017 Ulbora Labs LLC. (www.ulboralabs.com)
+ Copyright (C) 2018 Ulbora Labs LLC. (www.ulboralabs.com)
  All rights reserved.
 
- Copyright (C) 2017 Ken Williamson
+ Copyright (C) 2018 Ken Williamson
  All rights reserved.
 
  Certain inventions and disclosures in this file may be claimed within

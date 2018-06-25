@@ -1,0 +1,22 @@
+mode: set
+onlineAccountCreator/handlers/handler.go:41.42,43.36 2 1
+onlineAccountCreator/handlers/handler.go:48.2,48.12 1 1
+onlineAccountCreator/handlers/handler.go:43.36,45.3 1 1
+onlineAccountCreator/handlers/handler.go:45.3,47.3 1 1
+onlineAccountCreator/handlers/handler.go:52.40,54.34 2 1
+onlineAccountCreator/handlers/handler.go:59.2,59.12 1 1
+onlineAccountCreator/handlers/handler.go:54.34,56.3 1 1
+onlineAccountCreator/handlers/handler.go:56.3,58.3 1 1
+onlineAccountCreator/handlers/handler.go:63.38,65.37 2 1
+onlineAccountCreator/handlers/handler.go:70.2,70.12 1 1
+onlineAccountCreator/handlers/handler.go:65.37,67.3 1 1
+onlineAccountCreator/handlers/handler.go:67.3,69.3 1 1
+onlineAccountCreator/handlers/handler.go:74.40,76.34 2 1
+onlineAccountCreator/handlers/handler.go:81.2,81.12 1 1
+onlineAccountCreator/handlers/handler.go:76.34,78.3 1 1
+onlineAccountCreator/handlers/handler.go:78.3,80.3 1 1
+onlineAccountCreator/handlers/handler.go:85.38,87.32 2 1
+onlineAccountCreator/handlers/handler.go:92.2,92.12 1 1
+onlineAccountCreator/handlers/handler.go:87.32,89.3 1 1
+onlineAccountCreator/handlers/handler.go:89.3,91.3 1 1
+onlineAccountCreator/handlers/indexHandler.go:34.71,59.2 1 1

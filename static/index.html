@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+{{template "header"}}
+
+<body>
+    {{template "navbar" .}}
+    <div class="row1">
+        <div class="form-wrapper">
+            <p class="form-label">Get A Free MyApiGateway.com Account</p>
+            <p>No credit card required.</p>
+            <form class="ui form">
+                <div class="field">
+                    <label>First Name</label>
+                    <input type="text" name="first-name" placeholder="First Name" required>
+                </div>
+                <div class="field">
+                    <label>Last Name</label>
+                    <input type="text" name="last-name" placeholder="Last Name" required>
+                </div>
+                <div class="field">
+                    <label>Email</label>
+                    <input type="email" name="email" placeholder="someaddress@gmail.com" required>
+                </div>
+                <div class="field">
+                    <label>Company</label>
+                    <input type="text" name="company-name" placeholder="Company (not required)">
+                </div>
+                <div class="field">
+                    <label>Website</label>
+                    <input type="text" name="website" placeholder="www.myapigateway.com (not required)">
+                </div>
+                <div class="challenge">
+                    <p class="form-label">Are you a robot?</p>
+                    <div class="field">
+                        <label>Question</label>
+                        <input type="text" disabled name="question">
+                    </div>
+                    <div class="field">
+                        <label>Answer</label>
+                        <input type="text" name="answer">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        <input type="checkbox" tabindex="0" class="hidden" required>
+                        <label>I agree to the Terms and Conditions</label>
+                    </div>
+                </div>               
+                <button class="ui button" type="submit">Submit</button>
+            </form>
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>

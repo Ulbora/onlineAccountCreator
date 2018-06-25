@@ -1,0 +1,179 @@
+@blue: rgb(19, 73, 128);
+@row1: rgb(245, 247, 250);
+@fontcolor: rgb(4, 4, 141);
+body {
+    color: @fontcolor;
+    @media (min-width: 1024px) {
+        font-size: 12pt;
+    }
+    @media (max-width: 1024px) {
+        font-size: 12pt;
+    }
+    @media (max-height: 700px) {
+        font-size: 12pt;
+    }
+    @media (max-width: 768px) {
+        font-size: 10pt;
+    }
+    @media (max-width: 480px) {
+        font-size: 10pt;
+    }
+}
+
+.top-header {
+    background: @blue;
+    color: white;
+    width: 100%;
+    @media (min-width: 1024px) {
+        padding: 1% 0 1% 0;
+    }
+    @media (max-width: 1024px) {
+        padding: 1.5% 0 1.5% 0;
+    }
+    @media (max-height: 700px) {
+        padding: 1.5% 0 1.5% 0;
+    }
+    @media (max-width: 768px) {
+        padding: 2% 0 2% 0;
+    }
+    @media (max-width: 480px) {
+        padding: 2% 0 2% 0;
+    }
+}
+
+.logo {
+    font-weight: bold;
+    @media (min-width: 1024px) {
+        padding: 0 0 0 1%;
+        font-size: 14pt;
+    }
+    @media (max-width: 1024px) {
+        font-size: 14pt;
+        padding: 0 0 0 1%;
+    }
+    @media (max-height: 700px) {
+        font-size: 14pt;
+        padding: 0 0 0 2%;
+    }
+    @media (max-width: 768px) {
+        font-size: 12pt;
+        padding: 0 0 0 2%;
+    }
+    @media (max-width: 480px) {
+        font-size: 10pt;
+        padding: 0 0 0 2%;
+    }
+}
+
+.free {
+    font-weight: bold;
+    text-align: center;
+    @media (min-width: 1024px) {
+        padding: 0 0 0 1%;
+        font-size: 14pt;
+    }
+    @media (max-width: 1024px) {
+        font-size: 14pt;
+        padding: 0 0 0 1%;
+    }
+    @media (max-height: 700px) {
+        font-size: 14pt;
+        padding: 0 0 0 2%;
+    }
+    @media (max-width: 768px) {
+        font-size: 12pt;
+        padding: 0 0 0 2%;
+    }
+    @media (max-width: 480px) {
+        font-size: 10pt;
+        padding: 0 0 0 2%;
+    }
+}
+
+.row1 {
+    background: @row1;
+    text-align: center;
+    @media (min-width: 1024px) {
+        padding: 1% 0 0 0;
+    }
+    @media (max-width: 1024px) {
+        padding: 1% 0 0 0;
+    }
+    @media (max-height: 700px) {
+        padding: 1% 0 0 0;
+    }
+    @media (max-width: 768px) {
+        padding: 1% 0 0 0;
+    }
+    @media (max-width: 480px) {
+        padding: 1% 0 0 0;
+    }
+}
+
+.form-wrapper {   
+    @media (min-width: 1024px) {
+        width: 50%;
+        margin: 0 0 0 25%;
+    }
+    @media (max-width: 1024px) {
+        width: 50%;
+        margin: 0 0 0 25%;
+    }
+    @media (max-height: 700px) {
+        width: 70%;
+        margin: 0 0 0 15%;
+    }
+    @media (max-width: 768px) {
+        width: 90%;
+        margin: 0 0 0 5%;
+    }
+    @media (max-width: 480px) {
+        width: 90%;
+        margin: 0 0 0 5%;
+    }
+}
+
+.form-label {
+    font-weight: bold;
+    @media (min-width: 1024px) {
+        font-size: 18pt;
+    }
+    @media (max-width: 1024px) {
+        font-size: 18pt;
+    }
+    @media (max-height: 700px) {
+        font-size: 16pt;
+    }
+    @media (max-width: 768px) {
+        font-size: 12pt;
+    }
+    @media (max-width: 480px) {
+        font-size: 10pt;
+    }
+}
+
+
+.challenge {  
+    border: solid 1px blue;
+    border-radius: 10px;
+    @media (min-width: 1024px) {
+        width: 80%;
+        margin: 1% 0 1% 10%;
+    }
+    @media (max-width: 1024px) {
+        width: 80%;
+        margin: 1% 0 1% 10%;
+    }
+    @media (max-height: 700px) {
+        width: 80%;
+        margin: 1% 0 2% 10%;
+    }
+    @media (max-width: 768px) {
+        width: 100%;
+        margin: 1% 0 2% 0;
+    }
+    @media (max-width: 480px) {
+        width: 100%;
+        margin: 1% 0 3% 0;
+    }
+}
