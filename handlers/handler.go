@@ -50,7 +50,7 @@ func (h *Handler) GetOauth2Host() string {
 
 //GetUserHost GetUserHost
 func (h *Handler) GetUserHost() string {
-	var rtn = ""
+	var rtn string
 	if os.Getenv("USER_HOST") != "" {
 		rtn = os.Getenv("USER_HOST")
 	} else {
@@ -61,7 +61,7 @@ func (h *Handler) GetUserHost() string {
 
 //GetGwHost GetGwHost
 func (h *Handler) GetGwHost() string {
-	var rtn = ""
+	var rtn string
 	if os.Getenv("GATEWAY_HOST") != "" {
 		rtn = os.Getenv("GATEWAY_HOST")
 	} else {
@@ -72,7 +72,7 @@ func (h *Handler) GetGwHost() string {
 
 //GetClientID GetClientID
 func (h *Handler) GetClientID() string {
-	var rtn = ""
+	var rtn string
 	if os.Getenv("CLIENT_ID") != "" {
 		rtn = os.Getenv("CLIENT_ID")
 	} else {
@@ -83,7 +83,7 @@ func (h *Handler) GetClientID() string {
 
 //GetAPIKey GetAPIKey
 func (h *Handler) GetAPIKey() string {
-	var rtn = ""
+	var rtn string
 	if os.Getenv("API_KEY") != "" {
 		rtn = os.Getenv("API_KEY")
 	} else {
