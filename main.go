@@ -32,12 +32,19 @@ import (
 	"net/http"
 	hand "onlineAccountCreator/handlers"
 	mgn "onlineAccountCreator/managers"
+	"os"
 )
 
 var templates *template.Template
 var h hand.Handler
 
 func main() {
+	var captchaSecret string
+	if len(os.Args) == 2 {
+		captchaSecret = os.Args[1]
+	}
+	h.GetCaptchaSecret(captchaSecret)
+
 	h.Templates = template.Must(template.ParseFiles("./static/index.html", "./static/header.html",
 		"./static/navbar.html"))
 	var ac mgn.GatewayAccountService

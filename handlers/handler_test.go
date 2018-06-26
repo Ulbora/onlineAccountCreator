@@ -115,3 +115,20 @@ func TestHandler_GetAPIKey2(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestHandler_GetCaptchaSecret(t *testing.T) {
+	var h Handler
+	h.GetCaptchaSecret("125")
+	if h.CaptchaSecret != "125" {
+		t.Fail()
+	}
+}
+
+func TestHandler_GetCaptchaSecret2(t *testing.T) {
+	os.Setenv("CAPTCHA_SECRET", "555")
+	var h Handler
+	h.GetCaptchaSecret("")
+	if h.CaptchaSecret != "555" {
+		t.Fail()
+	}
+}

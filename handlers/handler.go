@@ -26,6 +26,7 @@
 package handlers
 
 import (
+	"fmt"
 	"html/template"
 	manager "onlineAccountCreator/managers"
 	"os"
@@ -33,8 +34,9 @@ import (
 
 //Handler Handler
 type Handler struct {
-	AcctService manager.GatewayAccountService
-	Templates   *template.Template
+	AcctService   manager.GatewayAccountService
+	Templates     *template.Template
+	CaptchaSecret string
 }
 
 //GetOauth2Host GetOauth2Host
@@ -90,4 +92,15 @@ func (h *Handler) GetAPIKey() string {
 		rtn = "403"
 	}
 	return rtn
+}
+
+//GetCaptchaSecret GetCaptchaSecret
+func (h *Handler) GetCaptchaSecret(ps string) {
+	if os.Getenv("CAPTCHA_SECRET") != "" {
+		h.CaptchaSecret = os.Getenv("CAPTCHA_SECRET")
+	} else {
+		h.CaptchaSecret = ps
+	}
+	fmt.Print("captcha secret: ")
+	fmt.Println(h.CaptchaSecret)
 }

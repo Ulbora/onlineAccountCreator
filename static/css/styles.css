@@ -244,3 +244,32 @@ body {
     margin: 1% 0 3% 0;
   }
 }
+.recaptcha {
+  width: 100%;
+  margin: 0 0 0 0%;
+}
+@media (min-width: 1024px) {
+  .recaptcha {
+    padding: 2% 0 2% 0;
+  }
+}
+@media (max-width: 1024px) {
+  .recaptcha {
+    padding: 2% 0 2% 0%;
+  }
+}
+@media (max-height: 700px) {
+  .recaptcha {
+    padding: 2% 0 2% 0%;
+  }
+}
+@media (max-width: 768px) {
+  .recaptcha {
+    padding: 2% 0 2% 0;
+  }
+}
+@media (max-width: 480px) {
+  .recaptcha {
+    padding: 3% 0 3% 0;
+  }
+}
