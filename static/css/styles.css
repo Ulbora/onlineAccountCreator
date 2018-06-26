@@ -33,27 +33,27 @@ body {
 }
 @media (min-width: 1024px) {
   .top-header {
-    padding: 1% 0 1% 0;
+    padding: 1% 0 .5% 0;
   }
 }
 @media (max-width: 1024px) {
   .top-header {
-    padding: 1.5% 0 1.5% 0;
+    padding: 1.5% 0 1% 0;
   }
 }
 @media (max-height: 700px) {
   .top-header {
-    padding: 1.5% 0 1.5% 0;
+    padding: 1.5% 0 1% 0;
   }
 }
 @media (max-width: 768px) {
   .top-header {
-    padding: 2% 0 2% 0;
+    padding: 2% 0 1.5% 0;
   }
 }
 @media (max-width: 480px) {
   .top-header {
-    padding: 2% 0 2% 0;
+    padding: 2% 0 1.5% 0;
   }
 }
 .logo {
@@ -61,32 +61,32 @@ body {
 }
 @media (min-width: 1024px) {
   .logo {
-    padding: 0 0 0 1%;
+    padding: .5% 0 0 1%;
     font-size: 14pt;
   }
 }
 @media (max-width: 1024px) {
   .logo {
     font-size: 14pt;
-    padding: 0 0 0 1%;
+    padding: .5% 0 0 1%;
   }
 }
 @media (max-height: 700px) {
   .logo {
     font-size: 14pt;
-    padding: 0 0 0 2%;
+    padding: .5% 0 0 2%;
   }
 }
 @media (max-width: 768px) {
   .logo {
     font-size: 12pt;
-    padding: 0 0 0 2%;
+    padding: .5% 0 0 2%;
   }
 }
 @media (max-width: 480px) {
   .logo {
     font-size: 10pt;
-    padding: 0 0 0 2%;
+    padding: .5% 0 0 2%;
   }
 }
 .free {
@@ -129,27 +129,27 @@ body {
 }
 @media (min-width: 1024px) {
   .row1 {
-    padding: 1% 0 0 0;
+    padding: 1% 0 5% 0;
   }
 }
 @media (max-width: 1024px) {
   .row1 {
-    padding: 1% 0 0 0;
+    padding: 1% 0 5% 0;
   }
 }
 @media (max-height: 700px) {
   .row1 {
-    padding: 1% 0 0 0;
+    padding: 1% 0 5% 0;
   }
 }
 @media (max-width: 768px) {
   .row1 {
-    padding: 1% 0 0 0;
+    padding: 1% 0 5% 0;
   }
 }
 @media (max-width: 480px) {
   .row1 {
-    padding: 1% 0 0 0;
+    padding: 1% 0 5% 0;
   }
 }
 @media (min-width: 1024px) {
