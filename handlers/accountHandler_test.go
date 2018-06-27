@@ -23,46 +23,18 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package main
+package handlers
 
 import (
-	"fmt"
-	"github.com/gorilla/mux"
-	"html/template"
+	//"html/template"
 	"net/http"
-	hand "onlineAccountCreator/handlers"
-	mgn "onlineAccountCreator/managers"
-	"os"
+	"net/http/httptest"
+	"testing"
 )
 
-var templates *template.Template
-var h hand.Handler
-
-func main() {
-	var captchaSecret string
-	if len(os.Args) == 2 {
-		captchaSecret = os.Args[1]
-	}
-	h.GetCaptchaSecret(captchaSecret)
-
-	h.Templates = template.Must(template.ParseFiles("./static/index.html", "./static/header.html",
-		"./static/navbar.html"))
-	var ac mgn.GatewayAccountService
-	ac.Host = h.GetOauth2Host()
-	ac.GwHost = h.GetGwHost()
-	ac.UserHost = h.GetUserHost()
-	ac.ClientID = h.GetClientID()
-	ac.APIKey = h.GetAPIKey()
-	h.AcctService = ac
-	router := mux.NewRouter()
-
-	router.HandleFunc("/", h.HandleIndex)
-	router.HandleFunc("/addAccount", h.HandleAddAccount)
-
-	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
-
-	fmt.Println("Online Account Creator!")
-	fmt.Println("Listening on :8050...")
-	http.ListenAndServe(":8050", router)
-
+func TestHandler_HandleAddAccount(t *testing.T) {
+	var h Handler
+	w := httptest.NewRecorder()
+	r, _ := http.NewRequest("GET", "/test", nil)
+	h.HandleAddAccount(w, r)
 }

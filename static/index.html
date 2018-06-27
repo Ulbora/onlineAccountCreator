@@ -8,14 +8,14 @@
         <div class="form-wrapper">
             <p class="form-label">Get A Free MyApiGateway.com Account</p>
             <p>No credit card required.</p>
-            <form class="ui form">
+            <form class="ui form" method="post" action="/addAccount">
                 <div class="field">
                     <label>First Name</label>
-                    <input type="text" name="first-name" placeholder="First Name" required>
+                    <input type="text" name="firstName" placeholder="First Name" required>
                 </div>
                 <div class="field">
                     <label>Last Name</label>
-                    <input type="text" name="last-name" placeholder="Last Name" required>
+                    <input type="text" name="lastName" placeholder="Last Name" required>
                 </div>
                 <div class="field">
                     <label>Email</label>
@@ -23,11 +23,18 @@
                 </div>
                 <div class="field">
                     <label>Company</label>
-                    <input type="text" name="company-name" placeholder="Company (not required)">
+                    <input type="text" name="companyName" placeholder="Company (not required)">
                 </div>
                 <div class="field">
                     <label>Website</label>
                     <input type="text" name="website" placeholder="www.myapigateway.com (not required)">
+                </div>
+
+                <div class="field">
+                    <div class="ui checkbox">
+                        <input type="checkbox" tabindex="0" class="hidden" required>
+                        <label>I agree to the Terms and Conditions</label>
+                    </div>
                 </div>
                 <!-- <div class="challenge">
                     <p class="form-label">Are you a robot?</p>
@@ -45,12 +52,7 @@
                     <div class="g-recaptcha" data-sitekey="6LfItGAUAAAAADYMmIW0UM7_2zd8zv_WWLFiG4rI"></div>
                 </div>
 
-                <div class="field">
-                    <div class="ui checkbox">
-                        <input type="checkbox" tabindex="0" class="hidden" required>
-                        <label>I agree to the Terms and Conditions</label>
-                    </div>
-                </div>
+                
                 <button class="ui button" type="submit">Submit</button>
             </form>
 

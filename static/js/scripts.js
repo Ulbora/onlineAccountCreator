@@ -1,0 +1,7 @@
+
+
+$(function () {
+    $('.ui.checkbox')
+        .checkbox()
+        ;
+});

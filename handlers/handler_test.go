@@ -26,7 +26,6 @@
 package handlers
 
 import (
-	//manager "onlineAccountCreator/managers"
 	"os"
 	"testing"
 )
@@ -129,6 +128,14 @@ func TestHandler_GetCaptchaSecret2(t *testing.T) {
 	var h Handler
 	h.GetCaptchaSecret("")
 	if h.CaptchaSecret != "555" {
+		t.Fail()
+	}
+}
+
+func TestHandler_sendCaptcha(t *testing.T) {
+	var h Handler
+	suc := h.sendCaptcha("test")
+	if suc != false {
 		t.Fail()
 	}
 }

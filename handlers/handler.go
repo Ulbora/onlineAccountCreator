@@ -28,6 +28,7 @@ package handlers
 import (
 	"fmt"
 	"html/template"
+	"net"
 	manager "onlineAccountCreator/managers"
 	"os"
 )
@@ -103,4 +104,24 @@ func (h *Handler) GetCaptchaSecret(ps string) {
 	}
 	fmt.Print("captcha secret: ")
 	fmt.Println(h.CaptchaSecret)
+}
+
+func (h *Handler) sendCaptcha(recaptchaResp string) bool {
+	var rtn = false
+
+	var ipAddr string
+
+	addrs, _ := net.InterfaceAddrs()
+	for _, a := range addrs {
+		if ipnet, ok := a.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
+			if ipnet.IP.To4() != nil {
+				ipAddr = ipnet.IP.String()
+				break
+			}
+		}
+	}
+
+	fmt.Print("client ip address: ")
+	fmt.Println(ipAddr)
+	return rtn
 }
