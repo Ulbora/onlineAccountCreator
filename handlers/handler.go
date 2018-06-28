@@ -120,6 +120,7 @@ func (h *Handler) sendCaptcha(recaptchaResp string) bool {
 			}
 		}
 	}
+	// add call to reCaptcha
 
 	fmt.Print("client ip address: ")
 	fmt.Println(ipAddr)
