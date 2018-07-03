@@ -9,6 +9,9 @@
             <p class="form-label">Get A Free MyApiGateway.com Account</p>
             <p>No credit card required.</p>
             <form class="ui form" method="post" action="/addAccount">
+                <div id="progBar" class="ui green progress" style="display:none;">
+                    <div class="bar"></div>
+                </div>
                 <div class="field">
                     <label>First Name</label>
                     <input type="text" name="firstName" placeholder="First Name" required>
@@ -53,7 +56,7 @@
                 </div>
 
                 
-                <button class="ui button" type="submit">Submit</button>
+                <button id="ulborUriAddBnt" onclick="ulborUriAddBntDisable();" class="ui button" type="submit">Submit</button>
             </form>
 
         </div>

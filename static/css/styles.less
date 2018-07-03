@@ -90,6 +90,26 @@ body {
     }
 }
 
+
+.status-row {    
+    text-align: center;
+    @media (min-width: 1024px) {
+        padding: 1% 0 5% 0;        
+    }
+    @media (max-width: 1024px) {
+        padding: 1% 0 5% 0;
+    }
+    @media (max-height: 700px) {
+        padding: 1% 0 5% 0;
+    }
+    @media (max-width: 768px) {
+        padding: 1% 0 5% 0;
+    }
+    @media (max-width: 480px) {
+        padding: 1% 0 5% 0;
+    }
+}
+
 .row1 {
     background: @row1;
     text-align: center;
@@ -194,5 +214,98 @@ body {
     }
     @media (max-width: 480px) {
         padding: 3% 0 3% 0;
+    }
+}
+
+
+.status-success {    
+    color:green;
+    text-align: center;
+    @media (min-width: 1024px) {
+        font-size: 18pt;
+        font-weight: bold;
+        padding: 10% 0 1% 0;        
+    }
+    @media (max-width: 1024px) {
+        font-size: 18pt;
+        font-weight: bold;
+        padding: 10% 0 2% 0; 
+    }
+    @media (max-height: 700px) {
+        font-size: 16pt;
+        font-weight: bold;
+        padding: 8% 0 2% 0; 
+    }
+    @media (max-width: 768px) {
+        font-size: 16pt;
+        font-weight: bold;
+        padding: 8% 0 2% 0; 
+    }
+    @media (max-width: 480px) {
+        font-size: 15pt;
+        font-weight: bold;
+        padding: 12% 0 2% 0; 
+    }
+}
+
+
+.status-fail {    
+    color: red;
+    text-align: center;
+    @media (min-width: 1024px) {
+        font-size: 18pt;
+        font-weight: bold;
+        padding: 10% 0 20% 0;        
+    }
+    @media (max-width: 1024px) {
+        font-size: 18pt;
+        font-weight: bold;
+        padding: 10% 0 20% 0; 
+    }
+    @media (max-height: 700px) {
+        font-size: 16pt;
+        font-weight: bold;
+        padding: 8% 0 20% 0; 
+    }
+    @media (max-width: 768px) {
+        font-size: 16pt;
+        font-weight: bold;
+        padding: 8% 0 20% 0; 
+    }
+    @media (max-width: 480px) {
+        font-size: 15pt;
+        font-weight: bold;
+        padding: 12% 0 20% 0; 
+    }
+}
+
+
+.status-email-code {    
+    color: red;
+    text-align: center;
+    @media (min-width: 1024px) {
+        font-size: 12pt;
+        font-weight: bold;
+        padding: 1% 0 2% 0;        
+    }
+    @media (max-width: 1024px) {
+        font-size: 12pt;
+        font-weight: bold;
+        padding: 1% 0 2% 0; 
+    }
+    @media (max-height: 700px) {
+        font-size: 12pt;
+        font-weight: bold;
+        padding: 2% 0 2% 0; 
+    }
+    @media (max-width: 768px) {
+        font-size: 10pt;
+        font-weight: bold;
+        padding: 2% 0 2% 0; 
+    }
+    @media (max-width: 480px) {
+        font-size: 10pt;
+        font-weight: bold;
+        padding: 2% 0 2% 0; 
     }
 }

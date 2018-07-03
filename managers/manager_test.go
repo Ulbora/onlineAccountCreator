@@ -56,11 +56,13 @@ func TestGatewayAccountService_AddGatewayAccount(t *testing.T) {
 	sel.Oauth2 = true
 	sel.APIGateway = true
 	cc.UlboraSelected = &sel
-	res := g.AddGatewayAccount(&cc)
+	res, pw := g.AddGatewayAccount(&cc)
 	if !res.Success || res.ClientID == 0 {
 		t.Fail()
 	} else {
 		addO2clnt = res.ClientID
+		fmt.Print("password: ")
+		fmt.Println(pw)
 	}
 }
 

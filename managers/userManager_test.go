@@ -50,8 +50,10 @@ func TestGatewayUserService_AddOauth2User(t *testing.T) {
 	cc.WebSite = "www.test1.com"
 	cc.Username = o2u1
 	cc.ClientID = "403"
-	res := g.AddOauth2User(&cc)
+	res, pw := g.AddOauth2User(&cc)
 	if !res.Success {
+		fmt.Print("password: ")
+		fmt.Println(pw)
 		t.Fail()
 	}
 }

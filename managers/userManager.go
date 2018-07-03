@@ -31,7 +31,7 @@ import (
 )
 
 //AddOauth2User AddOauth2User
-func (g *GatewayAccountService) AddOauth2User(acct *GatewayAccount) *services.UserResponse {
+func (g *GatewayAccountService) AddOauth2User(acct *GatewayAccount) (*services.UserResponse, string) {
 	var roleID int64
 	var u services.UserService
 	u.ClientID = g.ClientID
@@ -56,5 +56,5 @@ func (g *GatewayAccountService) AddOauth2User(acct *GatewayAccount) *services.Us
 	res := u.AddUser(&uu)
 	fmt.Print("res in add o2 user: ")
 	fmt.Println(res)
-	return res
+	return res, uu.Password
 }

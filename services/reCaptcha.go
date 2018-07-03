@@ -55,12 +55,11 @@ type CaptchaResponse struct {
 //SendCaptchaCall SendCaptchaCall
 func (c *CaptchaService) SendCaptchaCall(cap Captcha) *CaptchaResponse {
 	var rtn = new(CaptchaResponse)
-	var sURL = c.Host
+	var sURL = c.Host + "?secret=" + cap.Secret + "&response=" + cap.Response + "&remoteip=" + cap.Remoteip
 
-	aJSON := cm.GetJSONEncode(cap)
-	req, fail := cm.GetRequest(sURL, http.MethodPost, aJSON)
+	req, fail := cm.GetRequest(sURL, http.MethodPost, nil)
 	if !fail {
-		req.Header.Set("Content-Type", "application/json")
+
 		code := cm.ProcessServiceCall(req, &rtn)
 		rtn.Code = code
 	}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+{{template "header"}}
+
+<body>
+    {{template "navbar" .}}
+    <div class="status-row ">
+        <div class="form-wrapper">
+            <p class="form-label">Get A Free MyApiGateway.com Account</p>                      
+        </div>
+        
+        {{if .Success}}
+        <div class="status-success">
+            Success
+        </div>
+        <div class="status-email-code">
+            Check your email for an activation code.
+        </div>
+        {{else}}
+        <div class="status-fail">
+            Something went wrong!
+        </div>        
+        {{end}}
+        
+    </div>
+
+
+</body>
+
+</html>

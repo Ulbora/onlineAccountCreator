@@ -26,6 +26,8 @@
 package handlers
 
 import (
+	"html/template"
+
 	//"html/template"
 	"net/http"
 	"net/http/httptest"
@@ -33,8 +35,22 @@ import (
 )
 
 func TestHandler_HandleAddAccount(t *testing.T) {
+	testCap = true
 	var h Handler
 	w := httptest.NewRecorder()
-	r, _ := http.NewRequest("GET", "/test", nil)
+
+	r, _ := http.NewRequest("POST", "/test?firstName=bob&lastName=bobby&companyName=bob and co&email=bob@bobco.com&website=bobco.com&g-recaptcha-response=55444", nil)
+
 	h.HandleAddAccount(w, r)
+}
+
+func TestHandler_HandleStatus(t *testing.T) {
+	testCap = true
+	var h Handler
+	h.Templates = template.Must(template.ParseFiles("status.html"))
+	w := httptest.NewRecorder()
+
+	r, _ := http.NewRequest("GET", "/test?success=true", nil)
+
+	h.HandleStatus(w, r)
 }

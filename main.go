@@ -40,13 +40,16 @@ var h hand.Handler
 
 func main() {
 	var captchaSecret string
-	if len(os.Args) == 2 {
+	var credSecret string
+	if len(os.Args) == 3 {
 		captchaSecret = os.Args[1]
+		credSecret = os.Args[2]
 	}
 	h.GetCaptchaSecret(captchaSecret)
+	h.GetCredentialsSecret(credSecret)
 
 	h.Templates = template.Must(template.ParseFiles("./static/index.html", "./static/header.html",
-		"./static/navbar.html"))
+		"./static/navbar.html", "./static/status.html"))
 	var ac mgn.GatewayAccountService
 	ac.Host = h.GetOauth2Host()
 	ac.GwHost = h.GetGwHost()
@@ -58,6 +61,7 @@ func main() {
 
 	router.HandleFunc("/", h.HandleIndex)
 	router.HandleFunc("/addAccount", h.HandleAddAccount)
+	router.HandleFunc("/status", h.HandleStatus)
 
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
 

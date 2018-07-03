@@ -65,9 +65,10 @@ type GatewayAccount struct {
 }
 
 //AddGatewayAccount AddGatewayAccount
-func (g *GatewayAccountService) AddGatewayAccount(acct *GatewayAccount) *services.ClientResponse {
+func (g *GatewayAccountService) AddGatewayAccount(acct *GatewayAccount) (*services.ClientResponse, string) {
 	var rtn services.ClientResponse
 	var cid int64
+	var passwd string
 	// var c services.ClientService
 	// c.Token = g.Token
 	// c.Host = g.Host
@@ -80,10 +81,11 @@ func (g *GatewayAccountService) AddGatewayAccount(acct *GatewayAccount) *service
 		fmt.Println(cid)
 		acct.ClientID = strconv.FormatInt(res.ClientID, 10)
 		//rtn.Success = true
-		resu := g.AddOauth2User(acct)
+		resu, pw := g.AddOauth2User(acct)
 		fmt.Print("add user in add account: ")
 		fmt.Println(resu)
 		if resu.Success {
+			passwd = pw
 			resr := g.AddClientRole(acct)
 			fmt.Print("add roles in add account: ")
 			fmt.Println(resr)
@@ -108,7 +110,7 @@ func (g *GatewayAccountService) AddGatewayAccount(acct *GatewayAccount) *service
 			}
 		}
 	}
-	return &rtn
+	return &rtn, passwd
 	//fmt.Println(c)
 }
 

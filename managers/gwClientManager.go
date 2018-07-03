@@ -44,7 +44,7 @@ func (g *GatewayAccountService) AddGwClient(acct *GatewayAccount) *services.Gate
 	var cc services.GatewayClient
 	cc.ClientID, _ = strconv.ParseInt(acct.ClientID, 10, 64)
 	cc.APIKey = generateAPIKey()
-	cc.Enabled = true
+	cc.Enabled = false
 	cc.Level = "small"
 	//fmt.Print("gw client add req: ")
 	//fmt.Println(cc)

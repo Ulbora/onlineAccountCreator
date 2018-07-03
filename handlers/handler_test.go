@@ -26,6 +26,7 @@
 package handlers
 
 import (
+	"fmt"
 	"os"
 	"testing"
 )
@@ -132,10 +133,58 @@ func TestHandler_GetCaptchaSecret2(t *testing.T) {
 	}
 }
 
-func TestHandler_sendCaptcha(t *testing.T) {
+func TestHandler_GetCaptchaHost(t *testing.T) {
 	var h Handler
-	suc := h.sendCaptcha("test")
-	if suc != false {
+	hst := h.GetCaptchaHost()
+	if hst != "https://www.google.com/recaptcha/api/siteverify" {
+		t.Fail()
+	}
+}
+
+func TestHandler_GetCaptchaHost2(t *testing.T) {
+	os.Setenv("CAPTCHA_HOST", "555")
+	var h Handler
+	hst := h.GetCaptchaHost()
+	if hst != "555" {
+		t.Fail()
+	}
+}
+
+func TestHandler_GetCredentialsSecret(t *testing.T) {
+	var h Handler
+	h.GetCredentialsSecret("125")
+	if h.ClientCredSecret != "125" {
+		t.Fail()
+	}
+}
+
+func TestHandler_GetCredentialsSecret2(t *testing.T) {
+	os.Setenv("OAUTH2_CREDENTIALS_SECRET", "555444")
+	var h Handler
+	h.GetCredentialsSecret("")
+	if h.ClientCredSecret != "555444" {
+		t.Fail()
+	}
+}
+
+func TestHandler_GetCredentialsToken(t *testing.T) {
+	var h Handler
+	os.Setenv("OAUTH2_HOST", "")
+	os.Setenv("CLIENT_ID", "")
+	h.ClientCredSecret = "badsecret"
+	res := h.GetCredentialsToken()
+	fmt.Print("credentils token: ")
+	fmt.Println(res)
+	if res != "" {
+		t.Fail()
+	}
+}
+
+func TestHandler_sendCaptcha(t *testing.T) {
+	os.Setenv("CAPTCHA_HOST", "")
+	var h Handler
+	res := h.sendCaptcha("test")
+	if res.Success != false {
 		t.Fail()
 	}
 }

@@ -1,10 +1,10 @@
 mode: set
+onlineAccountCreator/services/reCaptcha.go:56.72,62.11 4 1
+onlineAccountCreator/services/reCaptcha.go:67.2,67.12 1 1
+onlineAccountCreator/services/reCaptcha.go:62.11,66.3 2 1
 onlineAccountCreator/services/challengeService.go:59.78,64.11 5 1
 onlineAccountCreator/services/challengeService.go:71.2,71.12 1 1
 onlineAccountCreator/services/challengeService.go:64.11,70.3 5 1
 onlineAccountCreator/services/challengeService.go:75.64,80.11 4 1
 onlineAccountCreator/services/challengeService.go:86.2,86.12 1 1
 onlineAccountCreator/services/challengeService.go:80.11,85.3 3 1
-onlineAccountCreator/services/reCaptcha.go:56.72,62.11 5 1
-onlineAccountCreator/services/reCaptcha.go:67.2,67.12 1 1
-onlineAccountCreator/services/reCaptcha.go:62.11,66.3 3 1

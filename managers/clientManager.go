@@ -39,7 +39,7 @@ func (g *GatewayAccountService) AddOauth2Client(acct *GatewayAccount) *services.
 	var cc services.Client
 	cc.Name = acct.Name
 	cc.Email = acct.Email
-	cc.Enabled = true
+	cc.Enabled = false
 	cc.WebSite = acct.WebSite
 
 	var uris []services.RedirectURI

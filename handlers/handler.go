@@ -26,18 +26,22 @@
 package handlers
 
 import (
-	"fmt"
+	//"fmt"
+	//"fmt"
+	oauth2 "github.com/Ulbora/go-oauth2-client"
 	"html/template"
 	"net"
 	manager "onlineAccountCreator/managers"
+	sr "onlineAccountCreator/services"
 	"os"
 )
 
 //Handler Handler
 type Handler struct {
-	AcctService   manager.GatewayAccountService
-	Templates     *template.Template
-	CaptchaSecret string
+	AcctService      manager.GatewayAccountService
+	Templates        *template.Template
+	CaptchaSecret    string
+	ClientCredSecret string
 }
 
 //GetOauth2Host GetOauth2Host
@@ -102,12 +106,54 @@ func (h *Handler) GetCaptchaSecret(ps string) {
 	} else {
 		h.CaptchaSecret = ps
 	}
-	fmt.Print("captcha secret: ")
-	fmt.Println(h.CaptchaSecret)
+	//fmt.Print("captcha secret: ")
+	//fmt.Println(h.CaptchaSecret)
 }
 
-func (h *Handler) sendCaptcha(recaptchaResp string) bool {
-	var rtn = false
+//GetCaptchaHost GetCaptchaHost
+func (h *Handler) GetCaptchaHost() string {
+	var rtn string
+	if os.Getenv("CAPTCHA_HOST") != "" {
+		rtn = os.Getenv("CAPTCHA_HOST")
+	} else {
+		rtn = "https://www.google.com/recaptcha/api/siteverify"
+	}
+	//fmt.Print("captcha host: ")
+	//fmt.Println(rtn)
+	return rtn
+}
+
+//GetCredentialsSecret GetCredentialsSecret
+func (h *Handler) GetCredentialsSecret(cs string) {
+	if os.Getenv("OAUTH2_CREDENTIALS_SECRET") != "" {
+		h.ClientCredSecret = os.Getenv("OAUTH2_CREDENTIALS_SECRET")
+	} else {
+		h.ClientCredSecret = cs
+	}
+}
+
+//GetCredentialsToken GetCredentialsToken
+func (h *Handler) GetCredentialsToken() string {
+	var rtn string
+	//fmt.Println("getting Client Credentials token")
+	var tn oauth2.ClientCredentialsToken
+	tn.OauthHost = h.GetOauth2Host()
+	tn.ClientID = h.GetClientID()
+	tn.Secret = h.ClientCredSecret
+	//fmt.Print("ClientCredentialsToken tn: ")
+	//fmt.Println(tn)
+	resp := tn.ClientCredentialsToken()
+	//fmt.Print("credentils token response: ")
+	//fmt.Println(resp)
+	if resp != nil {
+		rtn = resp.AccessToken
+		//fmt.Print("new credentials token: ")
+		//fmt.Println(resp.AccessToken)
+	}
+	return rtn
+}
+
+func (h *Handler) sendCaptcha(recaptchaResp string) *sr.CaptchaResponse {
 
 	var ipAddr string
 
@@ -120,9 +166,24 @@ func (h *Handler) sendCaptcha(recaptchaResp string) bool {
 			}
 		}
 	}
-	// add call to reCaptcha
+	// fmt.Print("captcha secret: ")
+	// fmt.Println(h.CaptchaSecret)
 
-	fmt.Print("client ip address: ")
-	fmt.Println(ipAddr)
-	return rtn
+	// fmt.Print("client ip address: ")
+	// fmt.Println(ipAddr)
+
+	// fmt.Print("recaptchaResp: ")
+	// fmt.Println(recaptchaResp)
+
+	var s sr.CaptchaService
+	s.Host = h.GetCaptchaHost()
+	var cap sr.Captcha
+	cap.Remoteip = ipAddr
+	cap.Secret = h.CaptchaSecret
+	cap.Response = recaptchaResp
+	res := s.SendCaptchaCall(cap)
+
+	return res
 }
+
+// add method to send email

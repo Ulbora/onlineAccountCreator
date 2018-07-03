@@ -123,6 +123,34 @@ body {
     padding: 0 0 0 2%;
   }
 }
+.status-row {
+  text-align: center;
+}
+@media (min-width: 1024px) {
+  .status-row {
+    padding: 1% 0 5% 0;
+  }
+}
+@media (max-width: 1024px) {
+  .status-row {
+    padding: 1% 0 5% 0;
+  }
+}
+@media (max-height: 700px) {
+  .status-row {
+    padding: 1% 0 5% 0;
+  }
+}
+@media (max-width: 768px) {
+  .status-row {
+    padding: 1% 0 5% 0;
+  }
+}
+@media (max-width: 480px) {
+  .status-row {
+    padding: 1% 0 5% 0;
+  }
+}
 .row1 {
   background: #f5f7fa;
   text-align: center;
@@ -271,5 +299,122 @@ body {
 @media (max-width: 480px) {
   .recaptcha {
     padding: 3% 0 3% 0;
+  }
+}
+.status-success {
+  color: green;
+  text-align: center;
+}
+@media (min-width: 1024px) {
+  .status-success {
+    font-size: 18pt;
+    font-weight: bold;
+    padding: 10% 0 1% 0;
+  }
+}
+@media (max-width: 1024px) {
+  .status-success {
+    font-size: 18pt;
+    font-weight: bold;
+    padding: 10% 0 2% 0;
+  }
+}
+@media (max-height: 700px) {
+  .status-success {
+    font-size: 16pt;
+    font-weight: bold;
+    padding: 8% 0 2% 0;
+  }
+}
+@media (max-width: 768px) {
+  .status-success {
+    font-size: 16pt;
+    font-weight: bold;
+    padding: 8% 0 2% 0;
+  }
+}
+@media (max-width: 480px) {
+  .status-success {
+    font-size: 15pt;
+    font-weight: bold;
+    padding: 12% 0 2% 0;
+  }
+}
+.status-fail {
+  color: red;
+  text-align: center;
+}
+@media (min-width: 1024px) {
+  .status-fail {
+    font-size: 18pt;
+    font-weight: bold;
+    padding: 10% 0 20% 0;
+  }
+}
+@media (max-width: 1024px) {
+  .status-fail {
+    font-size: 18pt;
+    font-weight: bold;
+    padding: 10% 0 20% 0;
+  }
+}
+@media (max-height: 700px) {
+  .status-fail {
+    font-size: 16pt;
+    font-weight: bold;
+    padding: 8% 0 20% 0;
+  }
+}
+@media (max-width: 768px) {
+  .status-fail {
+    font-size: 16pt;
+    font-weight: bold;
+    padding: 8% 0 20% 0;
+  }
+}
+@media (max-width: 480px) {
+  .status-fail {
+    font-size: 15pt;
+    font-weight: bold;
+    padding: 12% 0 20% 0;
+  }
+}
+.status-email-code {
+  color: red;
+  text-align: center;
+}
+@media (min-width: 1024px) {
+  .status-email-code {
+    font-size: 12pt;
+    font-weight: bold;
+    padding: 1% 0 2% 0;
+  }
+}
+@media (max-width: 1024px) {
+  .status-email-code {
+    font-size: 12pt;
+    font-weight: bold;
+    padding: 1% 0 2% 0;
+  }
+}
+@media (max-height: 700px) {
+  .status-email-code {
+    font-size: 12pt;
+    font-weight: bold;
+    padding: 2% 0 2% 0;
+  }
+}
+@media (max-width: 768px) {
+  .status-email-code {
+    font-size: 10pt;
+    font-weight: bold;
+    padding: 2% 0 2% 0;
+  }
+}
+@media (max-width: 480px) {
+  .status-email-code {
+    font-size: 10pt;
+    font-weight: bold;
+    padding: 2% 0 2% 0;
   }
 }
