@@ -27,6 +27,7 @@ package handlers
 
 import (
 	"fmt"
+	sr "onlineAccountCreator/services"
 	"os"
 	"testing"
 )
@@ -184,6 +185,54 @@ func TestHandler_sendCaptcha(t *testing.T) {
 	os.Setenv("CAPTCHA_HOST", "")
 	var h Handler
 	res := h.sendCaptcha("test")
+	if res.Success != false {
+		t.Fail()
+	}
+}
+
+func TestHandler_GetFromEmailAddress(t *testing.T) {
+	var h Handler
+	h.GetFromEmailAddress("125")
+	if h.FromEmailAddress != "125" {
+		t.Fail()
+	}
+}
+
+func TestHandler_GetFromEmailAddress2(t *testing.T) {
+	os.Setenv("FROM_EMAIL_ADDRESS", "555444")
+	var h Handler
+	h.GetFromEmailAddress("")
+	if h.FromEmailAddress != "555444" {
+		t.Fail()
+	}
+}
+
+func TestHandler_GetMailHost(t *testing.T) {
+	var h Handler
+	m := h.GetMailHost()
+	if m != "http://localhost:3002" {
+		t.Fail()
+	}
+}
+
+func TestHandler_GetMailHost2(t *testing.T) {
+	os.Setenv("MAIL_HOST", "555444")
+	var h Handler
+	m := h.GetMailHost()
+	if m != "555444" {
+		t.Fail()
+	}
+}
+
+func TestHandler_sendEmail(t *testing.T) {
+	os.Setenv("FROM_EMAIL_ADDRESS", "")
+	os.Setenv("MAIL_HOST", "")
+	var h Handler
+	var mm sr.MailMessage
+	mm.ToEmail = "some@some.com"
+	mm.Subject = "Welcome to MyApiGateway.com"
+	mm.HTMLMessage = "test message"
+	res := h.sendMail(&mm)
 	if res.Success != false {
 		t.Fail()
 	}

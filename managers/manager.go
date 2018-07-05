@@ -28,7 +28,7 @@ package managers
 import (
 	services "ApiGatewayAdminPortal/services"
 	ulboraUris "ApiGatewayAdminPortal/ulborauris"
-	"fmt"
+	//"fmt"
 	"math/rand"
 	urts "onlineAccountCreator/routes"
 	"strconv"
@@ -77,30 +77,30 @@ func (g *GatewayAccountService) AddGatewayAccount(acct *GatewayAccount) (*servic
 	if res.Success {
 		cid = res.ClientID
 		rtn.ClientID = cid
-		fmt.Print("cid: ")
-		fmt.Println(cid)
+		//fmt.Print("cid: ")
+		//fmt.Println(cid)
 		acct.ClientID = strconv.FormatInt(res.ClientID, 10)
 		//rtn.Success = true
 		resu, pw := g.AddOauth2User(acct)
-		fmt.Print("add user in add account: ")
-		fmt.Println(resu)
+		//fmt.Print("add user in add account: ")
+		//fmt.Println(resu)
 		if resu.Success {
 			passwd = pw
 			resr := g.AddClientRole(acct)
-			fmt.Print("add roles in add account: ")
-			fmt.Println(resr)
+			//fmt.Print("add roles in add account: ")
+			//fmt.Println(resr)
 			if resr.Success {
 				resgt := g.AddClientGrantType(acct)
-				fmt.Print("add grant type in add account: ")
-				fmt.Println(resgt)
+				//fmt.Print("add grant type in add account: ")
+				//fmt.Println(resgt)
 				if resgt.Success {
 					resUris := g.AddAllowedUris(acct)
-					fmt.Print("add uris in add account: ")
-					fmt.Println(resUris)
+					//fmt.Print("add uris in add account: ")
+					//fmt.Println(resUris)
 					if resUris.Success {
 						resgw := g.AddGwClient(acct)
-						fmt.Print("add gw client account: ")
-						fmt.Println(resgw)
+						//fmt.Print("add gw client account: ")
+						//fmt.Println(resgw)
 						if resgw.Success {
 							rtn.Success = true
 						}

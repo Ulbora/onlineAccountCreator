@@ -43,7 +43,7 @@ import (
 func (g *GatewayAccountService) AddAllowedUris(acct *GatewayAccount) *services.RoleURIResponse {
 	var rtn services.RoleURIResponse
 	uuris := ulboraUris.GetUlboraURIs(acct.UlboraSelected)
-	fmt.Println(uuris)
+	//fmt.Println(uuris)
 
 	var rs services.ClientRoleService
 	rs.ClientID = g.ClientID
@@ -56,7 +56,7 @@ func (g *GatewayAccountService) AddAllowedUris(acct *GatewayAccount) *services.R
 	for _, rrr := range *rr {
 		rMap[rrr.Role] = rrr.ID
 	}
-	fmt.Println(rMap)
+	//fmt.Println(rMap)
 
 	var au services.AllowedURIService
 	au.ClientID = g.ClientID
@@ -88,8 +88,8 @@ func (g *GatewayAccountService) AddAllowedUris(acct *GatewayAccount) *services.R
 	if !failed {
 		rtn.Success = true
 	}
-	fmt.Print("role url cnt: ")
-	fmt.Println(insCnt)
+	//fmt.Print("role url cnt: ")
+	//fmt.Println(insCnt)
 
 	return &rtn
 }

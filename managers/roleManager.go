@@ -27,7 +27,7 @@ package managers
 
 import (
 	services "ApiGatewayAdminPortal/services"
-	"fmt"
+	//"fmt"
 	"strconv"
 )
 
@@ -46,12 +46,12 @@ func (g *GatewayAccountService) AddClientRole(acct *GatewayAccount) *services.Cl
 	var rr services.ClientRole
 	rr.ClientID, _ = strconv.ParseInt(acct.ClientID, 10, 64)
 	rr.Role = adminRole
-	res := rs.AddClientRole(&rr)
-	fmt.Print("res in add client admin role: ")
-	fmt.Println(res)
+	rs.AddClientRole(&rr)
+	//fmt.Print("res in add client admin role: ")
+	//fmt.Println(res)
 	rr.Role = userRole
 	res2 := rs.AddClientRole(&rr)
-	fmt.Print("res in add client user role: ")
-	fmt.Println(res2)
+	//fmt.Print("res in add client user role: ")
+	//fmt.Println(res2)
 	return res2
 }

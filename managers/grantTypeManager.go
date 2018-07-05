@@ -27,7 +27,7 @@ package managers
 
 import (
 	services "ApiGatewayAdminPortal/services"
-	"fmt"
+	//"fmt"
 	"strconv"
 )
 
@@ -55,8 +55,8 @@ func (g *GatewayAccountService) AddClientGrantType(acct *GatewayAccount) *servic
 	gg.GrantType = clientGrant
 	res := gt.AddGrantType(&gg)
 
-	fmt.Print("res in add client user role: ")
-	fmt.Println(res)
+	//fmt.Print("res in add client user role: ")
+	//fmt.Println(res)
 	// if !res.Success || !res2.Success || !res3.Success {
 	// 	res3.Success = false
 	// }

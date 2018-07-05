@@ -380,7 +380,7 @@ body {
   }
 }
 .status-email-code {
-  color: red;
+  color: green;
   text-align: center;
 }
 @media (min-width: 1024px) {

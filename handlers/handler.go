@@ -28,6 +28,7 @@ package handlers
 import (
 	//"fmt"
 	//"fmt"
+	//"fmt"
 	oauth2 "github.com/Ulbora/go-oauth2-client"
 	"html/template"
 	"net"
@@ -42,6 +43,7 @@ type Handler struct {
 	Templates        *template.Template
 	CaptchaSecret    string
 	ClientCredSecret string
+	FromEmailAddress string
 }
 
 //GetOauth2Host GetOauth2Host
@@ -123,12 +125,34 @@ func (h *Handler) GetCaptchaHost() string {
 	return rtn
 }
 
+//GetMailHost GetMailHost
+func (h *Handler) GetMailHost() string {
+	var rtn string
+	if os.Getenv("MAIL_HOST") != "" {
+		rtn = os.Getenv("MAIL_HOST")
+	} else {
+		rtn = "http://localhost:3002"
+	}
+	//fmt.Print("captcha host: ")
+	//fmt.Println(rtn)
+	return rtn
+}
+
 //GetCredentialsSecret GetCredentialsSecret
 func (h *Handler) GetCredentialsSecret(cs string) {
 	if os.Getenv("OAUTH2_CREDENTIALS_SECRET") != "" {
 		h.ClientCredSecret = os.Getenv("OAUTH2_CREDENTIALS_SECRET")
 	} else {
 		h.ClientCredSecret = cs
+	}
+}
+
+//GetFromEmailAddress GetFromEmailAddress
+func (h *Handler) GetFromEmailAddress(em string) {
+	if os.Getenv("FROM_EMAIL_ADDRESS") != "" {
+		h.FromEmailAddress = os.Getenv("FROM_EMAIL_ADDRESS")
+	} else {
+		h.FromEmailAddress = em
 	}
 }
 
@@ -184,6 +208,19 @@ func (h *Handler) sendCaptcha(recaptchaResp string) *sr.CaptchaResponse {
 	res := s.SendCaptchaCall(cap)
 
 	return res
+}
+
+func (h *Handler) sendMail(em *sr.MailMessage) *sr.MailResponse {
+	var m sr.MailServerService
+	m.Host = h.GetMailHost()
+	m.ClientID = h.GetClientID()
+	m.APIKey = h.GetAPIKey()
+	m.Token = h.GetCredentialsToken()
+	em.FromEmail = h.FromEmailAddress
+	//fmt.Print("mail server: ")
+	//fmt.Println(m)
+	mres := m.SendMail(em)
+	return mres
 }
 
 // add method to send email

@@ -23,45 +23,14 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package handlers
+package services
 
-import (
-	"html/template"
+var testToken string
 
-	//"html/template"
-	"net/http"
-	"net/http/httptest"
-	"testing"
-)
+var tokenURL = "http://localhost:3000/oauth/token?client_id=403&client_secret=554444vfg55ggfff22454sw2fff2dsfd&grant_type=client_credentials"
 
-func TestHandler_HandleAddAccount(t *testing.T) {
-	testCap = true
-	var h Handler
-	w := httptest.NewRecorder()
-
-	r, _ := http.NewRequest("POST", "/test?firstName=bob&lastName=bobby&companyName=bob and co&email=bob@bobco.com&website=bobco.com&g-recaptcha-response=55444", nil)
-
-	h.HandleAddAccount(w, r)
-}
-
-func TestHandler_HandleStatus(t *testing.T) {
-	testCap = true
-	var h Handler
-	h.Templates = template.Must(template.ParseFiles("status.html"))
-	w := httptest.NewRecorder()
-
-	r, _ := http.NewRequest("GET", "/test?success=true", nil)
-
-	h.HandleStatus(w, r)
-}
-
-func TestHandler_HandleActivation(t *testing.T) {
-	testCap = true
-	var h Handler
-	h.Templates = template.Must(template.ParseFiles("status.html"))
-	w := httptest.NewRecorder()
-
-	r, _ := http.NewRequest("GET", "/test?clientId=123&email=bob@bob.com", nil)
-
-	h.HandleActivation(w, r)
+type TokenResponse struct {
+	Token     string `json:"access_token"`
+	TokenType string `json:"token_type"`
+	ExpiresIn int    `json:"expires_in"`
 }

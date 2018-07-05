@@ -27,7 +27,7 @@ package managers
 
 import (
 	services "ApiGatewayAdminPortal/services"
-	"fmt"
+	//"fmt"
 )
 
 //AddOauth2User AddOauth2User
@@ -54,7 +54,7 @@ func (g *GatewayAccountService) AddOauth2User(acct *GatewayAccount) (*services.U
 	uu.Enabled = true
 	uu.Password = generateTempPassword()
 	res := u.AddUser(&uu)
-	fmt.Print("res in add o2 user: ")
-	fmt.Println(res)
+	//fmt.Print("res in add o2 user: ")
+	//fmt.Println(res)
 	return res, uu.Password
 }

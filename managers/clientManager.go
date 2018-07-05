@@ -27,7 +27,7 @@ package managers
 
 import (
 	services "ApiGatewayAdminPortal/services"
-	"fmt"
+	//"fmt"
 )
 
 //AddOauth2Client AddOauth2Client
@@ -50,10 +50,10 @@ func (g *GatewayAccountService) AddOauth2Client(acct *GatewayAccount) *services.
 		uris = append(uris, uri)
 	}
 	cc.RedirectURIs = uris
-	fmt.Print("cc: ")
-	fmt.Println(cc)
+	//fmt.Print("cc: ")
+	//fmt.Println(cc)
 	res := c.AddClient(&cc)
-	fmt.Print("res in add o2 client: ")
-	fmt.Println(res)
+	//fmt.Print("res in add o2 client: ")
+	//fmt.Println(res)
 	return res
 }
