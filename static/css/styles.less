@@ -1,5 +1,6 @@
 @blue: rgb(19, 73, 128);
 @row1: rgb(245, 247, 250);
+@row2: rgb(236, 238, 240);
 @fontcolor: rgb(4, 4, 141);
 body {
     color: @fontcolor;
@@ -39,6 +40,19 @@ body {
     @media (max-width: 480px) {
         padding: 2% 0 1.5% 0;
     }
+}
+
+.top-header a:link {
+    color: white;    
+}
+
+.top-header a:visited {
+    color: white;    
+}
+
+.top-header a:hover {
+    color: white;
+    text-decoration: underline;
 }
 
 .logo {
@@ -90,11 +104,10 @@ body {
     }
 }
 
-
-.status-row {    
+.status-row {
     text-align: center;
     @media (min-width: 1024px) {
-        padding: 1% 0 5% 0;        
+        padding: 1% 0 5% 0;
     }
     @media (max-width: 1024px) {
         padding: 1% 0 5% 0;
@@ -114,7 +127,7 @@ body {
     background: @row1;
     text-align: center;
     @media (min-width: 1024px) {
-        padding: 1% 0 5% 0;        
+        padding: 1% 0 5% 0;
     }
     @media (max-width: 1024px) {
         padding: 1% 0 5% 0;
@@ -217,95 +230,112 @@ body {
     }
 }
 
-
-.status-success {    
-    color:green;
+.status-success {
+    color: green;
     text-align: center;
     @media (min-width: 1024px) {
         font-size: 18pt;
         font-weight: bold;
-        padding: 10% 0 1% 0;        
+        padding: 10% 0 1% 0;
     }
     @media (max-width: 1024px) {
         font-size: 18pt;
         font-weight: bold;
-        padding: 10% 0 2% 0; 
+        padding: 10% 0 2% 0;
     }
     @media (max-height: 700px) {
         font-size: 16pt;
         font-weight: bold;
-        padding: 8% 0 2% 0; 
+        padding: 8% 0 2% 0;
     }
     @media (max-width: 768px) {
         font-size: 16pt;
         font-weight: bold;
-        padding: 8% 0 2% 0; 
+        padding: 8% 0 2% 0;
     }
     @media (max-width: 480px) {
         font-size: 15pt;
         font-weight: bold;
-        padding: 12% 0 2% 0; 
+        padding: 12% 0 2% 0;
     }
 }
 
-
-.status-fail {    
+.status-fail {
     color: red;
     text-align: center;
     @media (min-width: 1024px) {
         font-size: 18pt;
         font-weight: bold;
-        padding: 10% 0 20% 0;        
+        padding: 10% 0 20% 0;
     }
     @media (max-width: 1024px) {
         font-size: 18pt;
         font-weight: bold;
-        padding: 10% 0 20% 0; 
+        padding: 10% 0 20% 0;
     }
     @media (max-height: 700px) {
         font-size: 16pt;
         font-weight: bold;
-        padding: 8% 0 20% 0; 
+        padding: 8% 0 20% 0;
     }
     @media (max-width: 768px) {
         font-size: 16pt;
         font-weight: bold;
-        padding: 8% 0 20% 0; 
+        padding: 8% 0 20% 0;
     }
     @media (max-width: 480px) {
         font-size: 15pt;
         font-weight: bold;
-        padding: 12% 0 20% 0; 
+        padding: 12% 0 20% 0;
     }
 }
 
-
-.status-email-code {    
-    color:green;
+.status-email-code {
+    color: green;
     text-align: center;
     @media (min-width: 1024px) {
         font-size: 12pt;
         font-weight: bold;
-        padding: 1% 0 2% 0;        
+        padding: 1% 0 2% 0;
     }
     @media (max-width: 1024px) {
         font-size: 12pt;
         font-weight: bold;
-        padding: 1% 0 2% 0; 
+        padding: 1% 0 2% 0;
     }
     @media (max-height: 700px) {
         font-size: 12pt;
         font-weight: bold;
-        padding: 2% 0 2% 0; 
+        padding: 2% 0 2% 0;
     }
     @media (max-width: 768px) {
         font-size: 10pt;
         font-weight: bold;
-        padding: 2% 0 2% 0; 
+        padding: 2% 0 2% 0;
     }
     @media (max-width: 480px) {
         font-size: 10pt;
         font-weight: bold;
-        padding: 2% 0 2% 0; 
+        padding: 2% 0 2% 0;
     }
+}
+
+.footer{
+    background: @row2;
+    padding: 2% 0 2% 0;
+    width: 100%;
+    text-align: center;
+}
+
+.footer a:link {
+    color: @fontcolor;
+}
+
+.footer a:visited {
+    color: @fontcolor;  
+}
+
+.footer a:hover {
+    color: @fontcolor;
+    text-decoration: underline;
 }

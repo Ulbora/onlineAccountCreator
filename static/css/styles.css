@@ -56,6 +56,16 @@ body {
     padding: 2% 0 1.5% 0;
   }
 }
+.top-header a:link {
+  color: white;
+}
+.top-header a:visited {
+  color: white;
+}
+.top-header a:hover {
+  color: white;
+  text-decoration: underline;
+}
 .logo {
   font-weight: bold;
 }
@@ -417,4 +427,20 @@ body {
     font-weight: bold;
     padding: 2% 0 2% 0;
   }
+}
+.footer {
+  background: #eceef0;
+  padding: 2% 0 2% 0;
+  width: 100%;
+  text-align: center;
+}
+.footer a:link {
+  color: #04048d;
+}
+.footer a:visited {
+  color: #04048d;
+}
+.footer a:hover {
+  color: #04048d;
+  text-decoration: underline;
 }

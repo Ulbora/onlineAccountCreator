@@ -52,7 +52,7 @@ func main() {
 	h.GetFromEmailAddress(fromEmail)
 
 	h.Templates = template.Must(template.ParseFiles("./static/index.html", "./static/header.html",
-		"./static/navbar.html", "./static/status.html", "./static/activated.html"))
+		"./static/navbar.html", "./static/status.html", "./static/activated.html", "./static/footer.html"))
 	var ac mgn.GatewayAccountService
 	ac.Host = h.GetOauth2Host()
 	ac.GwHost = h.GetGwHost()

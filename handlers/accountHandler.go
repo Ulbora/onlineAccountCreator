@@ -30,7 +30,7 @@ import (
 	//"time"
 	//"time"
 	//"bytes"
-	"fmt"
+	//"fmt"
 	//"net"
 	//"strings"
 	//"github.com/gorilla/mux"
@@ -104,21 +104,25 @@ func (h *Handler) HandleAddAccount(w http.ResponseWriter, r *http.Request) {
 		//h.Templates.ExecuteTemplate(w, "index.html", nil)
 		resAcct, pw := gws.AddGatewayAccount(&acct)
 		if resAcct.Success || testCap {
-			fmt.Print("Add gw acct res: ")
-			fmt.Println(resAcct)
-			var htmlMessage = "<!DOCTYPE html><html><head> <title>Free MyApiGateway.com Account</title> <meta charset='UTF-8'> <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'></head><body> <div style='background: rgb(19, 73, 128); width: 100%; color: white; padding: 1% 0 1% 2%; margin: 0 0 2% 0; font-weight: bold; font-size: 12pt;'> MyApiGateway.com </div><div style='text-align: center'> <div style='margin: 0 0 2% 0;'>Thank you for using MyApiGateway.com</div><div style='margin: 0 0 2% 0;'>Your new password is: " + pw + " </div><div>Activate your account by <a href='url'>clicking here.</a> </div></div></body></html>"
+			//fmt.Print("Add gw acct res: ")
+			//fmt.Println(resAcct)
+			var cidStr = strconv.FormatInt(resAcct.ClientID, 10)
+			var actURL = "http://" + r.Host + "/activate?clientId=" + cidStr + "&email=" + email + ""
+			var htmlMessage = "<!DOCTYPE html><html><head> <title>Free MyApiGateway.com Account</title> <meta charset='UTF-8'> <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'></head><body> <div style='background: rgb(19, 73, 128); width: 100%; color: white; padding: 1% 0 1% 2%; margin: 0 0 1% 0; font-weight: bold; font-size: 12pt;'> MyApiGateway.com </div><div style='text-align: center'> <div style='margin: 0 0 1% 0;'>Thank you for using MyApiGateway.com</div><div style='margin: 0 0 1% 0;'>Activate your account by <a href='" + actURL + "'>clicking here.</a></div><div style='margin: 0 0 2% 0;'>Your client id is: " + cidStr + "</div><div style='margin: 0 0 2% 0;'>Your username is: " + email + "</div><div style='margin: 0 0 1% 0;'>Your new password is: " + pw + "</div></div></body></html>"
+			//fmt.Print("htmlMessage")
+			//fmt.Println(htmlMessage)
 			var mm sr.MailMessage
 			mm.ToEmail = email
 			mm.Subject = "Welcome to MyApiGateway.com"
 			mm.HTMLMessage = htmlMessage
 			mres := h.sendMail(&mm)
-			fmt.Print("sendEmail res: ")
-			fmt.Println(mres)
+			//fmt.Print("sendEmail res: ")
+			//fmt.Println(mres)
 			if mres.Success || testCap {
 				success = "true"
 			}
-			fmt.Print("Add gw acct password: ")
-			fmt.Println(pw)
+			//fmt.Print("Add gw acct password: ")
+			//fmt.Println(pw)
 
 		}
 
@@ -133,8 +137,8 @@ func (h *Handler) HandleStatus(w http.ResponseWriter, r *http.Request) {
 	var success, _ = strconv.ParseBool(successStr)
 	var p Page
 	p.Success = success
-	fmt.Print("success: ")
-	fmt.Println(success)
+	//fmt.Print("success: ")
+	//fmt.Println(success)
 
 	h.Templates.ExecuteTemplate(w, "status.html", &p)
 
@@ -142,6 +146,7 @@ func (h *Handler) HandleStatus(w http.ResponseWriter, r *http.Request) {
 
 //HandleActivation HandleActivation
 func (h *Handler) HandleActivation(w http.ResponseWriter, r *http.Request) {
+	var success = false
 	var clientID = r.URL.Query().Get("clientId")
 	var email = r.URL.Query().Get("email")
 	var c services.ClientService
@@ -149,11 +154,13 @@ func (h *Handler) HandleActivation(w http.ResponseWriter, r *http.Request) {
 	c.Host = h.GetOauth2Host()
 	c.ClientID = h.GetClientID()
 	cl := c.GetClient(clientID)
-	if cl.Email == email || testCap {
+	//fmt.Print("res c1: ")
+	//fmt.Println(cl)
+	if (cl.ClientID > 0 && cl.Email == email) || testCap {
 		cl.Enabled = true
-		res := c.UpdateClient(cl)
-		fmt.Print("res client act: ")
-		fmt.Println(res)
+		c.UpdateClient(cl)
+		//fmt.Print("res client act: ")
+		//fmt.Println(res)
 		var cg services.GatewayClientService
 		cg.ClientID = h.GetClientID()
 		cg.Host = h.GetGwHost()
@@ -161,13 +168,22 @@ func (h *Handler) HandleActivation(w http.ResponseWriter, r *http.Request) {
 		cg.APIKey = h.GetAPIKey()
 		gwc := cg.GetClient(clientID)
 		fndCid, _ := strconv.ParseInt(clientID, 10, 64)
-		if gwc.ClientID == fndCid || testCap {
+		if (gwc.ClientID > 0 && gwc.ClientID == fndCid) || testCap {
 			gwc.Enabled = true
-			gwres := cg.UpdateClient(gwc)
-			fmt.Print("gwres client act: ")
-			fmt.Println(gwres)
+			cg.UpdateClient(gwc)
+			//fmt.Print("gwres client act: ")
+			//fmt.Println(gwres)
+			success = true
 		}
 	}
+	//fmt.Print("url:")
+	//fmt.Println(r.URL.Scheme + r.Host + r.URL.Path)
+	//fmt.Println(r.Host, r.URL.Path)
+	//success = true
+	if success {
+		h.Templates.ExecuteTemplate(w, "activated.html", nil)
+	} else {
+		http.Redirect(w, r, "/", http.StatusFound)
+	}
 
-	h.Templates.ExecuteTemplate(w, "activated.html", nil)
 }

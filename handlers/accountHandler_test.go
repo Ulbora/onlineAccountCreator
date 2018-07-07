@@ -65,3 +65,14 @@ func TestHandler_HandleActivation(t *testing.T) {
 
 	h.HandleActivation(w, r)
 }
+
+func TestHandler_HandleActivation2(t *testing.T) {
+	testCap = false
+	var h Handler
+	h.Templates = template.Must(template.ParseFiles("status.html"))
+	w := httptest.NewRecorder()
+
+	r, _ := http.NewRequest("GET", "/test?clientId=123&email=bob@bob.com", nil)
+
+	h.HandleActivation(w, r)
+}

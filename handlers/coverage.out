@@ -1,4 +1,17 @@
 mode: set
+onlineAccountCreator/handlers/accountHandler.go:52.76,81.28 8 1
+onlineAccountCreator/handlers/accountHandler.go:81.28,106.33 21 1
+onlineAccountCreator/handlers/accountHandler.go:127.3,127.68 1 1
+onlineAccountCreator/handlers/accountHandler.go:106.33,119.31 13 1
+onlineAccountCreator/handlers/accountHandler.go:122.4,123.19 2 1
+onlineAccountCreator/handlers/accountHandler.go:119.31,121.5 1 1
+onlineAccountCreator/handlers/accountHandler.go:133.72,143.2 7 1
+onlineAccountCreator/handlers/accountHandler.go:146.76,157.55 11 1
+onlineAccountCreator/handlers/accountHandler.go:181.2,181.13 1 1
+onlineAccountCreator/handlers/accountHandler.go:157.55,169.62 12 1
+onlineAccountCreator/handlers/accountHandler.go:169.62,175.4 5 1
+onlineAccountCreator/handlers/accountHandler.go:181.13,183.3 1 1
+onlineAccountCreator/handlers/accountHandler.go:183.3,185.3 1 1
 onlineAccountCreator/handlers/handler.go:50.42,52.36 2 1
 onlineAccountCreator/handlers/handler.go:57.2,57.12 1 1
 onlineAccountCreator/handlers/handler.go:52.36,54.3 1 1
@@ -46,14 +59,3 @@ onlineAccountCreator/handlers/handler.go:186.64,187.29 1 1
 onlineAccountCreator/handlers/handler.go:187.29,189.10 2 1
 onlineAccountCreator/handlers/handler.go:213.65,224.2 8 1
 onlineAccountCreator/handlers/indexHandler.go:34.71,59.2 1 1
-onlineAccountCreator/handlers/accountHandler.go:52.76,81.28 8 1
-onlineAccountCreator/handlers/accountHandler.go:81.28,106.33 21 1
-onlineAccountCreator/handlers/accountHandler.go:125.3,125.68 1 1
-onlineAccountCreator/handlers/accountHandler.go:106.33,117.31 11 1
-onlineAccountCreator/handlers/accountHandler.go:120.4,121.19 2 1
-onlineAccountCreator/handlers/accountHandler.go:117.31,119.5 1 1
-onlineAccountCreator/handlers/accountHandler.go:131.72,141.2 7 1
-onlineAccountCreator/handlers/accountHandler.go:144.76,152.34 8 1
-onlineAccountCreator/handlers/accountHandler.go:172.2,172.55 1 1
-onlineAccountCreator/handlers/accountHandler.go:152.34,164.40 12 1
-onlineAccountCreator/handlers/accountHandler.go:164.40,169.4 4 1
