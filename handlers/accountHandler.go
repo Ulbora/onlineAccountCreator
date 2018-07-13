@@ -98,6 +98,7 @@ func (h *Handler) HandleAddAccount(w http.ResponseWriter, r *http.Request) {
 		var sel ulboraUris.UlboraSelection
 		sel.Oauth2 = true
 		sel.APIGateway = true
+		///----------------------add code to turn on ulboracms
 		acct.UlboraSelected = &sel
 		//time.Sleep(5000 * time.Millisecond)
 		var success = "false"
