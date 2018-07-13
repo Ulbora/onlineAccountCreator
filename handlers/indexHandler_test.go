@@ -39,3 +39,11 @@ func TestHandler_HandleIndex(t *testing.T) {
 	r, _ := http.NewRequest("GET", "/test", nil)
 	h.HandleIndex(w, r)
 }
+
+func TestHandler_HandleIndex2(t *testing.T) {
+	var h Handler
+	h.Templates = template.Must(template.ParseFiles("index.html"))
+	w := httptest.NewRecorder()
+	r, _ := http.NewRequest("GET", "/test?ulboraCms=true", nil)
+	h.HandleIndex(w, r)
+}

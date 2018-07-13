@@ -1,17 +1,16 @@
 mode: set
 onlineAccountCreator/handlers/accountHandler.go:52.76,81.28 8 1
 onlineAccountCreator/handlers/accountHandler.go:81.28,106.33 21 1
-onlineAccountCreator/handlers/accountHandler.go:127.3,127.68 1 1
-onlineAccountCreator/handlers/accountHandler.go:106.33,119.31 13 1
-onlineAccountCreator/handlers/accountHandler.go:122.4,123.19 2 1
-onlineAccountCreator/handlers/accountHandler.go:119.31,121.5 1 1
-onlineAccountCreator/handlers/accountHandler.go:133.72,143.2 7 1
-onlineAccountCreator/handlers/accountHandler.go:146.76,157.55 11 1
-onlineAccountCreator/handlers/accountHandler.go:181.2,181.13 1 1
-onlineAccountCreator/handlers/accountHandler.go:157.55,169.62 12 1
-onlineAccountCreator/handlers/accountHandler.go:169.62,175.4 5 1
-onlineAccountCreator/handlers/accountHandler.go:181.13,183.3 1 1
-onlineAccountCreator/handlers/accountHandler.go:183.3,185.3 1 1
+onlineAccountCreator/handlers/accountHandler.go:129.3,129.68 1 1
+onlineAccountCreator/handlers/accountHandler.go:106.33,121.31 9 1
+onlineAccountCreator/handlers/accountHandler.go:121.31,123.5 1 1
+onlineAccountCreator/handlers/accountHandler.go:135.72,145.2 5 1
+onlineAccountCreator/handlers/accountHandler.go:148.76,159.55 9 1
+onlineAccountCreator/handlers/accountHandler.go:183.2,183.13 1 1
+onlineAccountCreator/handlers/accountHandler.go:159.55,171.62 10 1
+onlineAccountCreator/handlers/accountHandler.go:171.62,177.4 3 1
+onlineAccountCreator/handlers/accountHandler.go:183.13,185.3 1 1
+onlineAccountCreator/handlers/accountHandler.go:185.3,187.3 1 1
 onlineAccountCreator/handlers/handler.go:50.42,52.36 2 1
 onlineAccountCreator/handlers/handler.go:57.2,57.12 1 1
 onlineAccountCreator/handlers/handler.go:52.36,54.3 1 1
@@ -58,4 +57,6 @@ onlineAccountCreator/handlers/handler.go:185.26,186.64 1 1
 onlineAccountCreator/handlers/handler.go:186.64,187.29 1 1
 onlineAccountCreator/handlers/handler.go:187.29,189.10 2 1
 onlineAccountCreator/handlers/handler.go:213.65,224.2 8 1
-onlineAccountCreator/handlers/indexHandler.go:34.71,59.2 1 1
+onlineAccountCreator/handlers/indexHandler.go:39.71,63.25 3 1
+onlineAccountCreator/handlers/indexHandler.go:67.2,67.50 1 1
+onlineAccountCreator/handlers/indexHandler.go:63.25,65.3 1 1

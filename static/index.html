@@ -39,6 +39,9 @@
                         <label>I agree to the Terms and Conditions</label>
                     </div>
                 </div>
+                {{if .UlboraCms}}
+                <input name="ulboraCms" type="hidden" value="true">
+                {{end}}
                 <!-- <div class="challenge">
                     <p class="form-label">Are you a robot?</p>
                     <div class="field">

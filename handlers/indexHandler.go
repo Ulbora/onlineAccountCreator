@@ -30,8 +30,14 @@ import (
 	"net/http"
 )
 
+//PageParams PageParams
+type PageParams struct {
+	UlboraCms bool
+}
+
 //HandleIndex HandleIndex
 func (h *Handler) HandleIndex(w http.ResponseWriter, r *http.Request) {
+	var ulboracms = r.URL.Query().Get("ulboraCms")
 	// vars := mux.Vars(r)
 	// page := vars["content"]
 	// if page == "" {
@@ -53,7 +59,12 @@ func (h *Handler) HandleIndex(w http.ResponseWriter, r *http.Request) {
 	// pg.MetaKeyWords = h.MetaKeyWords
 	// pg.MetaDesc = h.MetaDesc
 	// pg.Title = h.Title
-	h.Templates.ExecuteTemplate(w, "index.html", nil)
+	var p PageParams
+	if ulboracms == "true" {
+		p.UlboraCms = true
+	}
+
+	h.Templates.ExecuteTemplate(w, "index.html", &p)
 
 	//}
 }

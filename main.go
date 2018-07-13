@@ -62,10 +62,10 @@ func main() {
 	h.AcctService = ac
 	router := mux.NewRouter()
 
-	router.HandleFunc("/", h.HandleIndex)
-	router.HandleFunc("/addAccount", h.HandleAddAccount)
-	router.HandleFunc("/status", h.HandleStatus)
-	router.HandleFunc("/activate", h.HandleActivation)
+	router.HandleFunc("/", h.HandleIndex).Methods("GET")
+	router.HandleFunc("/addAccount", h.HandleAddAccount).Methods("POST")
+	router.HandleFunc("/status", h.HandleStatus).Methods("GET")
+	router.HandleFunc("/activate", h.HandleActivation).Methods("GET")
 
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
 
