@@ -3,12 +3,12 @@
 {{template "header"}}
 
 <body>
-    {{template "navbar" .}}
+    {{if .UlboraCms}} {{template "navbarCms" .}} {{else}} {{template "navbar" .}} {{end}}
     <div class="status-row ">
         <div class="form-wrapper">
-            <p class="form-label">Get A Free MyApiGateway.com Account</p>                      
+            <p class="form-label">Get A Free Account</p>
         </div>
-        
+
         {{if .Success}}
         <div class="status-success">
             Success
@@ -19,9 +19,9 @@
         {{else}}
         <div class="status-fail">
             Something went wrong!
-        </div>        
+        </div>
         {{end}}
-        
+
     </div>
 
 

@@ -3,10 +3,14 @@
 {{template "header"}}
 
 <body>
-    {{template "navbar" .}}
+    {{if .UlboraCms}} {{template "navbarCms" .}} {{else}} {{template "navbar" .}} {{end}}
     <div class="row1">
         <div class="form-wrapper">
+            {{if .UlboraCms}}
+            <p class="form-label">Get A Free UlboraCMS.com Account</p>
+            {{else}}
             <p class="form-label">Get A Free MyApiGateway.com Account</p>
+            {{end}}
             <p>No credit card required.</p>
             <form class="ui form" method="post" action="/addAccount">
                 <div id="progBar" class="ui green progress" style="display:none;">
@@ -40,8 +44,7 @@
                     </div>
                 </div>
                 {{if .UlboraCms}}
-                <input name="ulboraCms" type="hidden" value="true">
-                {{end}}
+                <input name="ulboraCms" type="hidden" value="true"> {{end}}
                 <!-- <div class="challenge">
                     <p class="form-label">Are you a robot?</p>
                     <div class="field">
@@ -58,7 +61,7 @@
                     <div class="g-recaptcha" data-sitekey="6LfItGAUAAAAADYMmIW0UM7_2zd8zv_WWLFiG4rI"></div>
                 </div>
 
-                
+
                 <button id="ulborUriAddBnt" onclick="ulborUriAddBntDisable();" class="ui button" type="submit">Submit</button>
             </form>
 

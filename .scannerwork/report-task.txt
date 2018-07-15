@@ -3,5 +3,5 @@ projectKey=accountCreator
 serverUrl=https://sonarcloud.io
 serverVersion=7.3.0.14089
 dashboardUrl=https://sonarcloud.io/dashboard?id=accountCreator
-ceTaskId=AWR2qkC6owGp6EI3laN6
-ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWR2qkC6owGp6EI3laN6
+ceTaskId=AWSbhIlJjBVAKLfOnJR7
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWSbhIlJjBVAKLfOnJR7

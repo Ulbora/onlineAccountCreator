@@ -26,6 +26,7 @@
 package handlers
 
 import (
+	"fmt"
 	"strconv"
 	//"time"
 	//"time"
@@ -45,16 +46,29 @@ var testCap bool
 
 //Page Page
 type Page struct {
-	Success bool
+	Success   bool
+	UlboraCms bool
 }
 
 //HandleAddAccount HandleAddAccount
 func (h *Handler) HandleAddAccount(w http.ResponseWriter, r *http.Request) {
+	var useUlboraCms = false
+	var appName string
+	var activateCms = ""
 	firstName := r.FormValue("firstName")
 	lastName := r.FormValue("lastName")
 	email := r.FormValue("email")
 	companyName := r.FormValue("companyName")
 	website := r.FormValue("website")
+	ulboraCms := r.FormValue("ulboraCms")
+	if ulboraCms == "true" {
+		useUlboraCms = true
+		appName = "UlboraCMS.com"
+		activateCms = "&cms=true"
+	} else {
+		appName = "MyApiGateway.com"
+	}
+
 	recaptchaResp := r.FormValue("g-recaptcha-response")
 
 	// fmt.Print("firstName: ")
@@ -98,6 +112,12 @@ func (h *Handler) HandleAddAccount(w http.ResponseWriter, r *http.Request) {
 		var sel ulboraUris.UlboraSelection
 		sel.Oauth2 = true
 		sel.APIGateway = true
+		if useUlboraCms {
+			sel.Content = true
+			sel.ImageAdmin = true
+			sel.Mail = true
+			sel.Template = true
+		}
 		///----------------------add code to turn on ulboracms
 		acct.UlboraSelected = &sel
 		//time.Sleep(5000 * time.Millisecond)
@@ -108,13 +128,13 @@ func (h *Handler) HandleAddAccount(w http.ResponseWriter, r *http.Request) {
 			//fmt.Print("Add gw acct res: ")
 			//fmt.Println(resAcct)
 			var cidStr = strconv.FormatInt(resAcct.ClientID, 10)
-			var actURL = "http://" + r.Host + "/activate?clientId=" + cidStr + "&email=" + email + ""
-			var htmlMessage = "<!DOCTYPE html><html><head> <title>Free MyApiGateway.com Account</title> <meta charset='UTF-8'> <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'></head><body> <div style='background: rgb(19, 73, 128); width: 100%; color: white; padding: 1% 0 1% 2%; margin: 0 0 1% 0; font-weight: bold; font-size: 12pt;'> MyApiGateway.com </div><div style='text-align: center'> <div style='margin: 0 0 1% 0;'>Thank you for using MyApiGateway.com</div><div style='margin: 0 0 1% 0;'>Activate your account by <a href='" + actURL + "'>clicking here.</a></div><div style='margin: 0 0 2% 0;'>Your client id is: " + cidStr + "</div><div style='margin: 0 0 2% 0;'>Your username is: " + email + "</div><div style='margin: 0 0 1% 0;'>Your new password is: " + pw + "</div></div></body></html>"
+			var actURL = "http://" + r.Host + "/activate?clientId=" + cidStr + "&email=" + email + activateCms
+			var htmlMessage = "<!DOCTYPE html><html><head> <title>Free " + appName + " Account</title> <meta charset='UTF-8'> <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'></head><body> <div style='background: rgb(19, 73, 128); width: 100%; color: white; padding: 1% 0 1% 2%; margin: 0 0 1% 0; font-weight: bold; font-size: 12pt;'> " + appName + " </div><div style='text-align: center'> <div style='margin: 0 0 1% 0;'>Thank you for using " + appName + "</div><div style='margin: 0 0 1% 0;'>Activate your account by <a href='" + actURL + "'>clicking here.</a></div><div style='margin: 0 0 2% 0;'>Your client id is: " + cidStr + "</div><div style='margin: 0 0 2% 0;'>Your username is: " + email + "</div><div style='margin: 0 0 1% 0;'>Your new password is: " + pw + "</div></div></body></html>"
 			//fmt.Print("htmlMessage")
 			//fmt.Println(htmlMessage)
 			var mm sr.MailMessage
 			mm.ToEmail = email
-			mm.Subject = "Welcome to MyApiGateway.com"
+			mm.Subject = "Welcome to " + appName
 			mm.HTMLMessage = htmlMessage
 			mres := h.sendMail(&mm)
 			//fmt.Print("sendEmail res: ")
@@ -127,7 +147,7 @@ func (h *Handler) HandleAddAccount(w http.ResponseWriter, r *http.Request) {
 
 		}
 
-		http.Redirect(w, r, "/status?success="+success, http.StatusFound)
+		http.Redirect(w, r, "/status?success="+success+activateCms, http.StatusFound)
 
 	}
 }
@@ -136,8 +156,12 @@ func (h *Handler) HandleAddAccount(w http.ResponseWriter, r *http.Request) {
 func (h *Handler) HandleStatus(w http.ResponseWriter, r *http.Request) {
 	var successStr = r.URL.Query().Get("success")
 	var success, _ = strconv.ParseBool(successStr)
+	var cms = r.URL.Query().Get("cms")
 	var p Page
 	p.Success = success
+	if cms == "true" {
+		p.UlboraCms = true
+	}
 	//fmt.Print("success: ")
 	//fmt.Println(success)
 
@@ -150,6 +174,9 @@ func (h *Handler) HandleActivation(w http.ResponseWriter, r *http.Request) {
 	var success = false
 	var clientID = r.URL.Query().Get("clientId")
 	var email = r.URL.Query().Get("email")
+	var cms = r.URL.Query().Get("cms")
+	fmt.Print("cms: ")
+	fmt.Println(cms)
 	var c services.ClientService
 	c.Token = h.GetCredentialsToken()
 	c.Host = h.GetOauth2Host()
@@ -182,7 +209,12 @@ func (h *Handler) HandleActivation(w http.ResponseWriter, r *http.Request) {
 	//fmt.Println(r.Host, r.URL.Path)
 	//success = true
 	if success {
-		h.Templates.ExecuteTemplate(w, "activated.html", nil)
+		if cms == "true" {
+			h.Templates.ExecuteTemplate(w, "activatedCms.html", nil)
+		} else {
+			h.Templates.ExecuteTemplate(w, "activated.html", nil)
+		}
+
 	} else {
 		http.Redirect(w, r, "/", http.StatusFound)
 	}

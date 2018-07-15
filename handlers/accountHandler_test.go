@@ -44,6 +44,16 @@ func TestHandler_HandleAddAccount(t *testing.T) {
 	h.HandleAddAccount(w, r)
 }
 
+func TestHandler_HandleAddAccount2(t *testing.T) {
+	testCap = true
+	var h Handler
+	w := httptest.NewRecorder()
+
+	r, _ := http.NewRequest("POST", "/test?firstName=bob&lastName=bobby&companyName=bob and co&email=bob@bobco.com&website=bobco.com&ulboraCms=true&g-recaptcha-response=55444", nil)
+
+	h.HandleAddAccount(w, r)
+}
+
 func TestHandler_HandleStatus(t *testing.T) {
 	testCap = true
 	var h Handler
@@ -51,6 +61,17 @@ func TestHandler_HandleStatus(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	r, _ := http.NewRequest("GET", "/test?success=true", nil)
+
+	h.HandleStatus(w, r)
+}
+
+func TestHandler_HandleStatus2(t *testing.T) {
+	testCap = true
+	var h Handler
+	h.Templates = template.Must(template.ParseFiles("status.html"))
+	w := httptest.NewRecorder()
+
+	r, _ := http.NewRequest("GET", "/test?success=true&cms=true", nil)
 
 	h.HandleStatus(w, r)
 }
@@ -69,10 +90,21 @@ func TestHandler_HandleActivation(t *testing.T) {
 func TestHandler_HandleActivation2(t *testing.T) {
 	testCap = false
 	var h Handler
-	h.Templates = template.Must(template.ParseFiles("status.html"))
+	h.Templates = template.Must(template.ParseFiles("activated.html"))
 	w := httptest.NewRecorder()
 
 	r, _ := http.NewRequest("GET", "/test?clientId=123&email=bob@bob.com", nil)
+
+	h.HandleActivation(w, r)
+}
+
+func TestHandler_HandleActivation3(t *testing.T) {
+	testCap = true
+	var h Handler
+	h.Templates = template.Must(template.ParseFiles("activatedCms.html"))
+	w := httptest.NewRecorder()
+
+	r, _ := http.NewRequest("GET", "/test?clientId=123&email=bob@bob.com&cms=true", nil)
 
 	h.HandleActivation(w, r)
 }
