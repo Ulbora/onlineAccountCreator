@@ -71,8 +71,8 @@ func (h *Handler) GetUserHost() string {
 //GetGwHost GetGwHost
 func (h *Handler) GetGwHost() string {
 	var rtn string
-	if os.Getenv("GATEWAY_HOST") != "" {
-		rtn = os.Getenv("GATEWAY_HOST")
+	if os.Getenv("API_GATEWAY_HOST") != "" {
+		rtn = os.Getenv("API_GATEWAY_HOST")
 	} else {
 		rtn = "http://localhost:3011"
 	}
@@ -128,8 +128,9 @@ func (h *Handler) GetCaptchaHost() string {
 //GetMailHost GetMailHost
 func (h *Handler) GetMailHost() string {
 	var rtn string
-	if os.Getenv("MAIL_HOST") != "" {
-		rtn = os.Getenv("MAIL_HOST")
+	if os.Getenv("API_GATEWAY_HOST") != "" {
+		rtn = os.Getenv("API_GATEWAY_HOST")
+		rtn = rtn + "/mail"
 	} else {
 		rtn = "http://localhost:3002"
 	}
