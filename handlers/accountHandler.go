@@ -141,6 +141,9 @@ func (h *Handler) HandleAddAccount(w http.ResponseWriter, r *http.Request) {
 			//fmt.Println(mres)
 			if mres.Success || testCap {
 				success = "true"
+			} else {
+				fmt.Print("sendEmail res: ")
+				fmt.Println(mres)
 			}
 			//fmt.Print("Add gw acct password: ")
 			//fmt.Println(pw)
