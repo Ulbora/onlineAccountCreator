@@ -36,9 +36,11 @@ import (
 )
 
 const (
-	prodFreeUserPortalRedirectURL = "http://www.userportal.myapigateway.com/tokenImplicitHandler"
-	localUserPortalRedirectURL    = "http://localhost:8092/tokenImplicitHandler"
-	localUlboraCmsRedirectURL     = "http://localhost:8090/admin/token"
+	prodFreeUserPortalRedirectURL    = "http://www.userportal.myapigateway.com/tokenImplicitHandler"
+	prodFreeCmsUserPortalRedirectURL = "http://www.userportal.ulboracms.com/tokenImplicitHandler"
+	localUserPortalRedirectURL       = "http://localhost:8092/tokenImplicitHandler"
+	localCmsUserPortalRedirectURL    = "http://localhost:8060/tokenImplicitHandler"
+	localUlboraCmsRedirectURL        = "http://localhost:8090/admin/token"
 )
 
 //GatewayAccountService GatewayAccountService

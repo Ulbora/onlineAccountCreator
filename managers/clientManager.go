@@ -43,7 +43,7 @@ func (g *GatewayAccountService) AddOauth2Client(acct *GatewayAccount) *services.
 	cc.WebSite = acct.WebSite
 
 	var uris []services.RedirectURI
-	var redirectURLs = []string{prodFreeUserPortalRedirectURL, localUserPortalRedirectURL, localUlboraCmsRedirectURL}
+	var redirectURLs = []string{prodFreeUserPortalRedirectURL, prodFreeCmsUserPortalRedirectURL, localCmsUserPortalRedirectURL, localUserPortalRedirectURL, localUlboraCmsRedirectURL}
 	for i := range redirectURLs {
 		var uri services.RedirectURI
 		uri.URI = redirectURLs[i]
